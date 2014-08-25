@@ -210,8 +210,12 @@ function sak_display_array_list($params, $field_mapping = null)
                 if (!empty($field_value)) {
                     $label = isset($link_view[$field_name]['label']) ? $label = $link_view[$field_name]['label'] : $field_value;
                 }
-                $url = $link_view[$field_name]['href'] . "&amp;params=$params_link";
-                $html .= "<a href=\"$url\">$label</a>";
+                if (!empty($link_view[$field_name]['href'])) {
+                    $url = $link_view[$field_name]['href'] . "&amp;params=$params_link";
+                    $html .= "<a href=\"$url\">$label</a>";
+                } else {
+                    $html .= $label;
+                }
             }
             else
                 $html .= $field_value;
