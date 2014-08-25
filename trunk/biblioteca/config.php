@@ -20,8 +20,6 @@ $config['app_root'] = dirname(__FILE__);
 
 
 $config['db']['dsn'] = 'pgsql:host=127.0.0.1;dbname=dbbiblioteca;user=biblio;password=cdm00';
-$config['db']['username'] = 'fotocop';
-$config['db']['password'] = 'fotocop'; 
 
 
 define('MAX_RECORDS_LIST', 500);
