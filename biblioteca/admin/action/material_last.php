@@ -8,7 +8,7 @@ $sql = <<<END
         inventario,
         titulo,
         autor,
-        editorial,
+        editor,
         fecha_publicacion,
         paginas,
         palabras_clave,

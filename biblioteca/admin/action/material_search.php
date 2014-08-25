@@ -10,6 +10,7 @@ $sql = <<<END
         disponibilidad,
         autor,
         titulo,
+        disponibilidad,
         palabras_clave,
         archivo_digital as archivo
     from 
