@@ -10,7 +10,9 @@ $sql = <<<END
         disponibilidad,
         autor,
         titulo,
-        palabras_clave
+        disponibilidad,
+        palabras_clave,
+        case when char_length(coalesce(archivo_digital, '')) > 0 then '@' else '' end as archivo
     from 
         libros
     where

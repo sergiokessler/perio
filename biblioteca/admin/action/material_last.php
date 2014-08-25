@@ -6,13 +6,13 @@ require_once 'share/data_display.php';
 $sql = <<<END
     select 
         inventario,
-        titulo,
+        ubicacion,
+        disponibilidad,
         autor,
-        editor,
-        fecha_publicacion,
-        paginas,
+        titulo,
+        disponibilidad,
         palabras_clave,
-        doc_tipo,
+        archivo_digital as archivo,
         disponibilidad 
     from 
         libros
