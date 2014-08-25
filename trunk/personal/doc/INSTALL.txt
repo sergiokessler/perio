@@ -1,0 +1,121 @@
+
+Requisitos de software para instalar y configurar CallCenter2
+
+Necesarios:
+
+    Apache
+    PHP 4.3.x
+    PostgreSql 7.4.x
+    Pear (algunos paquetes: DB, DB_Table, HTML_Menu)
+
+
+Optativos:
+
+    phpPgAdmin
+
+
+- Copiar todos los archivos de este modulo en alguna carpeta 
+accesible por el servidor web (ej: /var/www/html/cc2)
+
+
+- Instalar postgresql
+  ~~~~~~~~~~~~~~~~~~~
+
+    # yum install postgresql-server
+
+    # chkconfig postgresql on  (para que inicie con el sistema)
+
+
+- Verificar si postgresql está corriendo
+
+    # service postgresql status
+
+  en caso de no estar corriendo:
+
+    # service postgresql start
+
+
+  optativo: configurar postgres para que escuche en un puerto tcp/ip
+    (por defecto escucha en un socket unix, lo cual es mas rapido)
+
+    # vi /var/lib/pgsql/data/postgresql.conf
+        tcpip_socket = true
+    # vi /var/lib/pgsql/data/pg_hba.conf
+        local  all    all             ident   sameuser
+        host    all         all         127.0.0.1         255.255.255.255   md5
+
+    # service postgresql restart
+
+
+- Creacion de DB
+  ~~~~~~~~~~~~~~
+    $ su - postgres
+    $ createdb cc2
+    $ psql cc2 < /var/www/html/cc2/sql/callcenter.sql
+    $ psql cc2
+
+Welcome to psql 7.4.8, the PostgreSQL interactive terminal.
+
+Type:  \copyright for distribution terms
+       \h for help with SQL commands
+       \? for help on internal slash commands
+       \g or terminate with semicolon to execute query
+       \q to quit
+
+cc2=# \d
+              List of relations
+ Schema |       Name       | Type  |  Owner
+--------+------------------+-------+----------
+ public | grupo            | table | postgres
+ public | producto         | table | postgres
+ public | producto_usuario | table | postgres
+ public | rol              | table | postgres
+ public | usuario          | table | postgres
+(5 rows)
+
+cc2=# select * from usuario;
+.
+.
+.
+
+cc2=# alter user postgres with password 'sql';
+ALTER USER
+
+cc2=# \q
+
+
+- Instalar paquetes de Pear
+  ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    # pear install DB DB_Table HTML_quickform
+
+
+
+- Instalar phpPgAdmin (optativo)
+  ~~~~~~~~~~~~~~~~~~~
+
+    # mkdir /var/www/html/phpPgAdmin
+    # cd /var/www/html/phpPgAdmin
+    # wget http://easynews.dl.sourceforge.net/sourceforge/phppgadmin/phpPgAdmin-3.5.4.tar.gz
+    # vi /var/www/html/phpPgAdmin/conf/config.inc.php
+        $conf['extra_login_security'] = false;
+
+
+- Revisar CC2 configuracion
+  ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    # vi /var/www/html/cc2/config.php
+
+
+
+- Cambios en php.ini
+  ~~~~~~~~~~~~~~~~~~
+
+max_execution_time = 120     ; Maximum execution time of each script, in seconds
+
+memory_limit = 24M      ; Maximum amount of memory a script may consume
+
+; Maximum allowed size for uploaded files.
+upload_max_filesize = 8M
+
+
