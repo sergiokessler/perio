@@ -87,9 +87,9 @@ if (isset($_SESSION['logged_in'])) {
               <li class="navbar-header">Préstamos</li>
               <li <?php $o='prestamo_list'; echo($action==$o ? 'class="active"' : '')?>><a href="?action=<?php echo $o?>">Ver préstamos</a></li>
               <li <?php $o='prestamo_insert'; echo($action==$o ? 'class="active"' : '')?>><a href="?action=<?php echo $o?>">Cargar préstamo</a></li>
-              <li class="navbar-header">Reportes</li>
+<!--              <li class="navbar-header">Reportes</li>
               <li <?php $o='report_totales'; echo($action==$o ? 'class="active"' : '')?>><a href="?action=<?php echo $o?>">Totales</a></li>
-            </ul>
+-->            </ul>
           </div><!--/.well -->
 <?php
 } else {
