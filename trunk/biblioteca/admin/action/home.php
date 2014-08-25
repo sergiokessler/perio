@@ -15,7 +15,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $st = $db->prepare($sql);
 $st->execute($sql_data);
-$data = $st->fetchOne(PDO::FETCH_ASSOC);
+$data = $st->fetch(PDO::FETCH_ASSOC);
 
 
 echo '      <div class="hero-unit">';
