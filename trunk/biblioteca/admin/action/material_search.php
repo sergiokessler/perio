@@ -12,7 +12,7 @@ $sql = <<<END
         titulo,
         disponibilidad,
         palabras_clave,
-        archivo_digital as archivo
+        case when char_length(coalesce(archivo_digital, '')) > 0 then '@' else '' end as archivo
     from 
         libros
     where
@@ -190,8 +190,6 @@ if (empty($_GET['search'])) {
     } else {
         $params['primary_key'] = 'inventario';
         $params['link_view']['inventario']['href'] = '?action=material_select';
-
-        $params['link_view']['archivo']['label'] = '@';
 
         echo sak_display_array_list($params);
     }
