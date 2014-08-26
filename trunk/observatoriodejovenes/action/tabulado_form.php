@@ -1,6 +1,5 @@
 <?php
-
-$table = 'Tabulado'; 
+// vim: set fileencoding=utf8 :
 
 $date_options = array(
     'language'  => 'es',
