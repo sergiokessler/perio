@@ -22,7 +22,7 @@ $config['auth'][] = array('consulta', 'consulta');
 //$_SESSION['logged_in'] = true;
 
 
-$config['db']['dsn'] = 'sqlite:' . __DIR__ . '/db/observatoriodejovenes.db3;charset=UTF-8';
+$config['db']['dsn'] = 'sqlite:' . __DIR__ . '/db/observatoriodejovenes.db3';
 
 
 define('MAX_RECORDS_LIST', 500);
