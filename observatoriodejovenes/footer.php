@@ -18,17 +18,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-<?php
-
-if (DEBUG) {
-    echo '<pre>';
-    print_r($_REQUEST);
-
-    print_r($_SESSION);
-    echo '</pre>';
-
-}
-?>
 
   </body>
 </html>

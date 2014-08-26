@@ -1,4 +1,5 @@
 <?php
+// vim: set fileencoding=utf8 :
 
 
 if (isset($params['record_id'])) {
@@ -80,7 +81,7 @@ else
      */
 
     if ( ($_SESSION['u'] != 'admin') and ($_SESSION['u'] != $edit_row['carga_usuario']) ) {
-        echo 'Ud. no puede editar este registro, fué cargado por otra persona. Presione el boton de Atras';
+        echo 'Ud. no puede editar este registro, fuÃ© cargado por otra persona. Presione el boton de Atras';
         include_once 'footer.php';
         exit();
     }
