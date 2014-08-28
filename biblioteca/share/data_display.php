@@ -199,7 +199,7 @@ function sak_display_array_list($params, $field_mapping = null)
         foreach ($row as $field_name => $field_value)
         {
             $html .= '<td class="listado">';
-            $field_value = htmlentities($field_value);
+            $field_value = htmlentities($field_value, null, $encoding = 'ISO-8859-1');
 
             if (isset($link_view) and (isset($link_view[$field_name])) )
             {
@@ -292,7 +292,7 @@ function sak_display_array_record($params, $field_mapping = null)
                 $html[] = "<a href=\"$href\">$label</a>";
             }
             else {
-                $html[] = nl2br(htmlentities(stripslashes($value)));
+                $html[] = nl2br(htmlentities(stripslashes($value), null, $encoding = 'ISO-8859-1'));
             }
             $html[] = '</td>';
             $html[] = '</tr>';
