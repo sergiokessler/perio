@@ -1,4 +1,5 @@
 <?php
+# vim: set fileencoding=latin1 : 
 
 require_once 'share/data_display.php';
 

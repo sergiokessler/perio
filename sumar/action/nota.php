@@ -1,5 +1,5 @@
 <?php
-
+// vim: set fileencoding=latin1 :
 
 if (isset($params['record_id'])) {
     $record_id = $params['record_id'];
