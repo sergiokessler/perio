@@ -6,148 +6,6 @@ require_once 'share/data_utils.php';
 
 
 
-function sak_search_form($params, $field_meta)
-{
-    $operator['ilike'] = 'contiene';
-    $operator['='] = 'igual a';
-    $operator['<='] = 'menor a';
-    $operator['>='] = 'mayor a';
-
-//        echo '<pre>';
-//        var_dump($params);
-//        echo '</pre>';
-
-
-    $params_f = $params;
-    $params_f = params_encode($params_f);
-
-
-    $opciones['*'] = (bool) (isset($_REQUEST['btnOptions']));
-    $opciones['+'] = (bool) (isset($_REQUEST['btnOptions'])) && ($_REQUEST['btnOptions'] == '+');
-    $opciones['-'] = (bool) (isset($_REQUEST['btnOptions'])) && ($_REQUEST['btnOptions'] == '-');
-
-    $buscar = (bool) (isset($_REQUEST['btnSubmit'])) && ($_REQUEST['btnSubmit'] == 'Buscar');
-
-
-    if (!$opciones['*'] and !$buscar) {
-        $_SESSION['search_conditions'] = 1;
-    }
-    if ($opciones['+']) {
-        $_SESSION['search_conditions'] += 1;
-    }
-    if ($opciones['-']) {
-        $_SESSION['search_conditions'] -= 1;
-    }
-
-
-    $form = '<form name="form_search" method="get">';
-
-    $form .= '<input type="hidden" name="action" value="' . $params['table'] . '">';
-//    $form .= '<input type="hidden" name="params" value="' . $params_f . '">';
-    $form .= 'Buscar donde el campo:<br>';
-
-    $search_conditions = $_SESSION['search_conditions'];
-    for ($i = 0; $i < $search_conditions; $i++)
-    {
-        if ($i > 0) {
-            $form .= ' y <br>';
-        }
-
-        $form .= '<select name="field[]">';
-        foreach($field_meta['search'] as $key => $value)
-        {
-            if ( isset($_GET['field'][$i]) and ($_GET['field'][$i] == $key) )
-                $form .= '<option selected value="' . $key . '">' . $value . '</option>';
-            else
-                $form .= '<option value="' . $key . '">' . $value . '</option>';
-        }
-        $form .= '</select>';
-
-        $form .= '<select name="operator[]">';
-        foreach($operator as $key => $value)
-        {
-            if ( isset($_GET['operator'][$i]) and ($_GET['operator'][$i] == $key) )
-                $form .= '<option selected value="' . $key . '">' . $value . '</option>';
-            else
-                $form .= '<option value="' . $key . '">' . $value . '</option>';
-        }
-        $form .= '</select>';
-
-        if ( isset($_GET['value'][$i]) )
-            $form .= '<input type="text" name="value[]" value="' . $_GET['value'][$i] . '">';
-        else
-            $form .= '<input type="text" name="value[]">';
-    }
-
-    $form .= ' <input type="submit" name="btnOptions" value="+">';
-    if ($search_conditions > 1)
-        $form .= ' <input type="submit" name="btnOptions" value="-">';
-
-    $form .= '<br> ordenado por ';
-    $form .= '<select name="order">';
-    foreach($field_meta['search'] as $key => $value)
-    {
-        if ( isset($_GET['order']) and ($_GET['order'] == $key) )
-            $form .= '<option selected value="' . $key . '">' . $value . '</option>';
-        else
-            $form .= '<option value="' . $key . '">' . $value . '</option>';
-    }
-    $form .= '</select>';
-
-    $form .= ' <input type="submit" name="btnSubmit" value="Buscar">';
-    $form .= '</form>';
-    
-    return($form);
-}
-
-function sak_search_form_process($params)
-{
-    $field = $_GET['field'];
-    $operator = $_GET['operator'];
-    $value = $_GET['value'];
-    $order = $_GET['order'];
-
-    $where = null;
-
-    for($i = 0; $i < count($value); $i++)
-    {
-        if ($value[$i] != '')
-        {
-            $where['where_arr'][] = ' ' . $field[$i] . ' ' . $operator[$i] . ' ? ';
-            if ($operator[$i] == 'ilike')
-                $where['params'][] =  '%' . $value[$i] . '%';
-            else
-                $where['params'][] =  $value[$i];
-        }
-    }
-
-    $where['where_str'] = '';
-    if (isset($where['where_arr']))
-    {
-        $where['where_str'] = join($where['where_arr'], ' and ');
-        if (strpos($params['sql_list'], 'where') === False)
-            $params['sql_where'] = ' where ' . $where['where_str'];
-        else
-            $params['sql_where'] = ' and ' . $where['where_str'];
-
-        $params['sql_data']  = $where['params'];
-    }
-    else
-    {
-        $params['sql_where'] = null;
-        $params['sql_data']  = null;
-    }
-
-    $params['sql_order'] = ' order by ' . $order;
-    $params['op'] = 'select';
-    unset($params['record_id']);
-
-    return($params);
-}
-
-
-
-
 function sak_display_array_list($params, $field_mapping = null)
 {
     global $config;
@@ -199,7 +57,7 @@ function sak_display_array_list($params, $field_mapping = null)
         foreach ($row as $field_name => $field_value)
         {
             $html .= '<td class="listado">';
-            $field_value = htmlentities($field_value);
+            $field_value = htmlentities($field_value, null, $encoding = 'ISO-8859-1');
 
             if (isset($link_view) and (isset($link_view[$field_name])) )
             {
@@ -298,7 +156,7 @@ function sak_display_array_record($params, $field_mapping = null)
                 $html[] = "<a href=\"$href\">$label</a>";
             }
             else {
-                $html[] = nl2br(htmlentities(stripslashes($value)));
+                $html[] = nl2br(htmlentities(stripslashes($value), null, $encoding = 'ISO-8859-1'));
             }
             $html[] = '</td>';
             $html[] = '</tr>';
