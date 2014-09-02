@@ -35,14 +35,14 @@ foreach ($data as $rec)
 {
     $params['record_id'] = $rec['inventario'];
 //    echo '<div class="span4">';
-    echo  htmlentities($rec['autor']);
+    echo  htmlentities($rec['autor'], null, $encoding = 'ISO-8859-1');
     echo '<p>';
     echo '<i>';
     echo '<a href="?action=material_select&amp;params=' . params_encode($params) . '">';
     echo $rec['inventario'];
     echo '</a>';
     echo '</i> - ';
-    echo nl2br(htmlentities($rec['titulo']));
+    echo nl2br(htmlentities($rec['titulo'], null, $encoding = 'ISO-8859-1'));
     echo '</p>';
 //    echo '</div>';
 }
