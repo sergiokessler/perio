@@ -9,34 +9,6 @@ $tweets_widget = <<<END
 END;
 
 
-/*
-$tweets = include 'tweets.php';
-$tweets = $tweets['statuses'];
-*/
-
-/*
-echo '<pre>';
-print_r($tweets);
-echo '</pre>';
-*/
-/*
-$tweets_html = 'Ultimos tweets:';
-$tweets_html .= '<table class="table table-striped">';
-foreach ($tweets as $t) {
-    $tweets_html .= '<tr>';
-    $tweets_html .= '<td>';
-    $tweets_html .= '<img src="' . $t['user']['profile_image_url'] . '">';
-    $tweets_html .= '</td>';
-    $tweets_html .= '<td>';
-    $tweets_html .= '<span style="font-weight:bold">' . $t['user']['name'] . '</span> ';
-    $tweets_html .= '<span style="color: lightgray">'. $t['created_at'] . '</span> ';
-    $tweets_html .= '<br>' . utf8_decode($t['text']);
-    $tweets_html .= '</td>';
-    $tweets_html .= '</tr>';
-}
-$tweets_html .= '</table>';
-*/
-
 $content = <<<END
         <div class="row-fluid">
 
@@ -46,6 +18,7 @@ $content = <<<END
         </div>
         <div class="span6">
             $tweets_widget
+            <p><a href="informes/Plan_Nacer_MSAL_Argentina_estadisticas_sociales.pdf">Ver estadísticas sociales</a></p>
         </div>
 
         </div>  <!-- row -->
