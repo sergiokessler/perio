@@ -24,9 +24,9 @@ $html .= '<tbody>';
 foreach ($files1 as $filename) {
     if($filename === '.' || $filename === '..') {continue;}
     if (strpos($filename, 'social') === false) {
-        $html .= '<tr><td><a href="informes/' . $filename . '">' . $filename . '</a></td>';
+        $html .= '<tr><td><a href="informes/' . $filename . '" target="_blank">' . $filename . '</a></td>';
     } else {
-        $html .= '<td><a href="informes/' . $filename . '">' . $filename . '</a></td></tr>';
+        $html .= '<td><a href="informes/' . $filename . '" target="_blank">' . $filename . '</a></td></tr>';
     }
 }
 
