@@ -8,6 +8,9 @@ $tweets_widget = <<<END
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 END;
 
+$anio_mes = date('Y-m', strtotime(date('Y-m-1')." -1 month"));
+$informe = 'informes/Programa-SUMAR-MSAL_ar-Informe-' . $anio_mes . '-web-social.pdf';
+
 
 $content = <<<END
         <div class="row-fluid">
@@ -18,7 +21,7 @@ $content = <<<END
         </div>
         <div class="span6">
             $tweets_widget
-            <p><a href="informes/Plan_Nacer_MSAL_Argentina_estadisticas_sociales.pdf">Ver estadísticas sociales</a></p>
+            <p><a href="$informe" target="_blank">Ver últimas estadísticas sociales</a></p>
         </div>
 
         </div>  <!-- row -->
