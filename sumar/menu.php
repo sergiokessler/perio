@@ -32,7 +32,7 @@ if (isset($_SESSION['logged_in'])) {
                       echo '</li>';
                   }
               ?>
-              <li><a href="informes/">Ver informes</a></li>
+              <li <?php $o='informe_list'; echo($action==$o ? 'class="active"' : '')?>><a href="?action=<?php echo $o?>">Ver informes</a></li>
 
 
               <li class="nav-header">Medios</li>
