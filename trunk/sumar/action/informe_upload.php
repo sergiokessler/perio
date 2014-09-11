@@ -27,7 +27,7 @@ if ( (isset($_REQUEST['btnSubmit']))
     $target_path = $target_path . basename( $_FILES['informe']['name']); 
 
     if(move_uploaded_file($_FILES['informe']['tmp_name'], $target_path)) {
-       $msg = "El archivo " . basename( $_FILES['informe']['name']) . " ha siso subido.";
+       $msg = "El archivo " . basename( $_FILES['informe']['name']) . " ha sido subido.";
     } else{
        $msg = "Hubo un error subiendo el archivo, por favor, intente nuevamente.";
        $msg.= '<br />' . $_FILES['informe']['tmp_name'];
