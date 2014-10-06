@@ -1,8 +1,7 @@
 <?php
 
-require_once 'DB.php';
-include 'graphs.inc.php';
 include 'config.php';
+include 'graphs.inc.php';
 
 function params_encode($params)
 {
