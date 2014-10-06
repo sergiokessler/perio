@@ -21,7 +21,7 @@ $config['db']['database'] = 'elecciones' . $anio;
 $config['db']['username'] = 'elec';
 $config['db']['password'] = 'osvaldolechero';
 
-$config['db']['dsn'] = $config['db']['phptype'] . ':host=' . $config['db']['hostspec'] . ';dbname=' . $config['db']['database'] . ';user=' . $config['db']['username']';password=' . $config['db']['password']; 
+$config['db']['dsn'] = $config['db']['phptype'] . ':host=' . $config['db']['hostspec'] . ';dbname=' . $config['db']['database'] . ';user=' . $config['db']['username'] . ';password=' . $config['db']['password']; 
 
 
 $config['db']['pg_str'] = 'host=' . $config['db']['hostspec'] . ' dbname=' . $config['db']['database'] . ' user=' . $config['db']['username'] . ' password=' . $config['db']['password'];
