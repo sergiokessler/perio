@@ -75,13 +75,11 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $sql = 'select count(distinct urna_id) as urnas_escrutadas from urna_total';
 $st = $db->query($sql); 
 $row = $st->fetch(PDO::FETCH_ASSOC); 
-//$row = $data[0];
 $urnas_escrutadas = $row['urnas_escrutadas'];
 
 $sql = 'select count(distinct urna_id) as urnas_total from urna';
 $st = $db->query($sql); 
 $row = $st->fetch(PDO::FETCH_ASSOC); 
-//$row = $data[0];
 $urnas_total = $row['urnas_total'];
 
 echo '<br>';
@@ -93,7 +91,11 @@ echo '<br>';
 $form_select = '';
 $st = $db->query($sql_urnas);
 while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $form_select .= '<option value="' . $row['urna_id'] . '">' . $row['urna_nombre'] . '</option>' . "\n";
+    $form_select .= '<option value="' . $row['urna_id'];
+    if (isset($_REQUEST['urna_id']) and $_REQUEST['urna_id'] == $row['urna_id']) {
+        $form_select .= ' selected="selected" ';
+    }
+    $form_select .= '">' . $row['urna_nombre'] . '</option>' . "\n";
     $urna_select[$row['urna_id']] = $row['urna_nombre'];
 }
 
