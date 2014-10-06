@@ -92,10 +92,11 @@ echo '<br>';
 
 $form_select = '';
 $st = $db->query($sql_urnas);
-
 while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
     $form_select .= '<option value="' . $row['urna_id'] . '">' . $row['urna_nombre'] . '</option>' . "\n";
 }
+$urna_select = $st->fetchAll(PDO::FETCH_ASSOC);
+
 
 $form = <<<END
 <form role="form">
