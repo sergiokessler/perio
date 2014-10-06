@@ -1,7 +1,6 @@
 <?php
 
 include 'config.php';
-require_once 'DB.php';
 
 
 
@@ -69,15 +68,20 @@ echo '</div>';
 echo '<div class="volver"><a href=".">Volver a inicio</a></div>';
 
 
-$db = DB::connect($config['db']) or die('Could connect to DB'); 
+$db = new PDO($config['db']['dsn']); 
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 $sql = 'select count(distinct urna_id) as urnas_escrutadas from urna_total';
-$row = $db->getRow($sql, array(), DB_FETCHMODE_ASSOC);
+$st = $db->query($sql); 
+$row = $st->fetch(PDO::FETCH_ASSOC); 
+//$row = $data[0];
 $urnas_escrutadas = $row['urnas_escrutadas'];
 
 $sql = 'select count(distinct urna_id) as urnas_total from urna';
-$row = $db->getRow($sql, array(), DB_FETCHMODE_ASSOC); 
+$st = $db->query($sql); 
+$row = $st->fetch(PDO::FETCH_ASSOC); 
+//$row = $data[0];
 $urnas_total = $row['urnas_total'];
 
 echo '<br>';
@@ -86,11 +90,11 @@ echo '<br>';
 echo '<br>';
 
 
-$urna_select = $db->getAssoc($sql_urnas);
-
 $form_select = '';
-foreach($urna_select as $value => $label) {
-    $form_select .= '<option value="' . $value . '">' . $label . '</option>' . "\n";
+$st = $db->query($sql_urnas);
+
+while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $form_select .= '<option value="' . $row['urna_id'] . '">' . $row['urna_nombre'] . '</option>' . "\n";
 }
 
 $form = <<<END
@@ -112,8 +116,9 @@ if (isset($_REQUEST['urna_id']))
 {
     $urna_id = $_REQUEST['urna_id'];
 
-    $sql_params = array($urna_id);
-    $data_values = $db->getAll($sql_centro, $sql_params, DB_FETCHMODE_ASSOC);
+    $st = $db->prepare($sql_centro); 
+    $st->execute(array($urna_id));
+    $data_values = $st->fetchAll(PDO::FETCH_ASSOC);
 
 //    echo '<pre>';
 //    var_dump($data_values);
@@ -154,7 +159,9 @@ if (isset($_REQUEST['urna_id']))
 
 
     // CLAUSTRO
-    $data_values = $db->getAll($sql_claustro, $sql_params, DB_FETCHMODE_ASSOC);
+    $st = $db->prepare($sql_claustro); 
+    $st->execute(array($urna_id));
+    $data_values = $st->fetchAll(PDO::FETCH_ASSOC);
 
     $html = '<br /><br /><h3>' . $urna_select[$urna_id] . ' - Claustro</h3>';
     $html .= '<table class="table table-striped">';
