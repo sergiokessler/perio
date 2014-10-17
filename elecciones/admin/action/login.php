@@ -53,7 +53,9 @@ if (!isset($_SESSION['logged_in']))
     include 'header.php';
 
     echo '<center>';
-    echo '<h1>' . $config['title'] . '</h1>';
+    if (!empty($config['title'])) {
+        echo '<h1>' . $config['title'] . '</h1>';
+    }
 
     if (isset($msg))
     {
