@@ -87,7 +87,9 @@ function sak_record_form($params, $field_meta, $field_mapping = null)
 
         $size  = $field_info['len'];
 
-        $element_options = $type_options[$element_type];
+        if (!empty($type_options[$element_type])) {
+            $element_options = $type_options[$element_type];
+        }
 
         if (isset($field_meta['select'][$name]))
         {

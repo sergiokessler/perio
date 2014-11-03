@@ -13,6 +13,12 @@ $params['table'] = 'lista';
 $params['primary_key'] = $params['table'] . '_id';
 $params['op'] = 'update';
 
+$date_defaults = array(
+    'd' => date('d'),
+    'M' => date('m'),
+    'Y' => date('Y'),
+); 
+
 // <query> 
 
 $field_meta['defaults']['fecha_desde'] = $date_defaults;
