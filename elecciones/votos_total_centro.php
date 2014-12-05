@@ -58,13 +58,16 @@ while($row = pg_fetch_assoc($result))
 $html .= '</tbody>';
 $html .= '</table>';
 
-echo '<h2 class="subtitulo">';
-echo 'Total de votos Centro: ', $votos_totales['centro'];
-echo '</h2>';
-
-
 $html_centro = $html;
 
+
+$title  = '<h3 style="text-align:center">';
+$title .= 'Votos Totales de Centro: ' . $votos_totales['centro'];
+$title .= '</h3>';
+
+
+
+echo $title;
 
 echo $html_centro;
 

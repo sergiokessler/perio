@@ -54,12 +54,16 @@ $html .= '</tbody>';
 $html .= '</table>'; 
 //$html .= '</div>';
 
-echo '<h2 class="subtitulo">';
-echo 'Total de votos Claustro: ', $votos_totales['claustro'];
-echo '</h2>';
-
-
 $html_claustro = $html;
 
 
+$title  = '<h3 style="text-align:center">';
+$title .= 'Votos Totales de Claustro: ' . $votos_totales['claustro'];
+$title .= '</h3>';
+
+
+
+echo $title;
+
 echo $html_claustro;
+

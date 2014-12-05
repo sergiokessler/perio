@@ -78,7 +78,10 @@ $html .= '</tbody>';
 $html .= '</table>';
 //$html .= '</div>';
 
-$title = "<h3 class='subtitulo'>Votos de Claustro: $total_votos votos</h3>";
+
+$title  = '<h3 style="text-align:center">';
+$title .= "Votos Positivos de Claustro: $total_votos votos<br>(sin nulos, blancos e impugnados)";
+$title .= '</h3>';
 
 //echo '<pre>';
 //print_r($params);

@@ -47,8 +47,6 @@ echo '<br>';
 
 if ($urnas_escrutadas > 0)
 {
-    echo '<h2 class="subtitulo">Participación en % - Votos Positivos (sin nulos, blancos e impugnados)</h2>';
-    echo "\n";
     include 'votos_graph_centro.php';
     echo '<br>';
     include 'votos_graph_claustro.php';
