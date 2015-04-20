@@ -94,25 +94,39 @@ while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
     $tipo_nota_select[$row['k']] = $row['v'];
 } 
 
-$tema_select = array('' => '-- Seleccione --');
-$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Tema' order by valor";
+$juventud_tema_select = array('' => '-- Seleccione --');
+$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Juventud Tema' order by valor";
 $st = $db->query($sql_sel);
 while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $tema_select[$row['k']] = $row['v'];
+    $juventud_tema_select[$row['k']] = $row['v'];
 } 
 
-$motivo_1_select = array('' => '-- Seleccione --');
-$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Motivo 1' order by valor";
+$juventud_motivo_1_select = array('' => '-- Seleccione --');
+$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Juventud Motivo 1' order by valor";
 $st = $db->query($sql_sel);
 while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $motivo_1_select[$row['k']] = $row['v'];
+    $juventud_motivo_1_select[$row['k']] = $row['v'];
 }
 
-$motivo_2_select = array('' => '-- Seleccione --');
-$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Motivo 2' order by valor";
+$juventud_motivo_2_select = array('' => '-- Seleccione --');
+$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Juventud Motivo 2' order by valor";
 $st = $db->query($sql_sel);
 while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $motivo_2_select[$row['k']] = $row['v'];
+    $juventud_motivo_2_select[$row['k']] = $row['v'];
+}
+
+$seguridad_tema_select = array('' => '-- Seleccione --');
+$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Seguridad Tema' order by valor";
+$st = $db->query($sql_sel);
+while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $seguridad_tema_select[$row['k']] = $row['v'];
+} 
+
+$seguridad_motivo_1_select = array('' => '-- Seleccione --');
+$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Seguridad Motivo 1' order by valor";
+$st = $db->query($sql_sel);
+while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $seguridad_motivo_1_select[$row['k']] = $row['v'];
 }
 
 $voces_select = array('' => '-- Seleccione --');
@@ -227,19 +241,29 @@ $form->addElement('select', 'new_row[tipo_de_nota]')
      ->loadOptions($tipo_nota_select)
      ->addRule('required', 'Valor requerido')
      ;
-$form->addElement('select', 'new_row[tema]')
-     ->setLabel('Tema:')
-     ->loadOptions($tema_select)
+//$form->addElement('select', 'new_row[juventud_tema]')
+//     ->setLabel('Juventud Tema:')
+//     ->loadOptions($juventud_tema_select)
+//     ->addRule('required', 'Valor requerido')
+//     ;
+$form->addElement('select', 'new_row[juventud_motivo_1]')
+     ->setLabel('Juventud Motivo 1:')
+     ->loadOptions($juventud_motivo_1_select)
      ->addRule('required', 'Valor requerido')
      ;
-$form->addElement('select', 'new_row[motivo_1]')
-     ->setLabel('Motivo 1:')
-     ->loadOptions($motivo_1_select)
-     ->addRule('required', 'Valor requerido')
+$form->addElement('select', 'new_row[juventud_motivo_2]')
+     ->setLabel('Juventud Motivo 2:')
+     ->loadOptions($juventud_motivo_2_select)
      ;
-$form->addElement('select', 'new_row[motivo_2]')
-     ->setLabel('Motivo 2:')
-     ->loadOptions($motivo_2_select)
+//$form->addElement('select', 'new_row[seguridad_tema]')
+//     ->setLabel('Seguridad Tema:')
+//     ->loadOptions($seguridad_tema_select)
+//     ->addRule('required', 'Valor requerido')
+     ;
+$form->addElement('select', 'new_row[seguridad_motivo_1]')
+     ->setLabel('Seguridad Motivo 1:')
+     ->loadOptions($seguridad_motivo_1_select)
+     ->addRule('required', 'Valor requerido')
      ;
 $form->addElement('select', 'new_row[voz_1]')
      ->setLabel('Voz 1:')
