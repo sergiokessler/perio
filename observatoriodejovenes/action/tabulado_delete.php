@@ -9,7 +9,7 @@ if (isset($params['record_id'])) {
 }
 
 $params['table'] = 'tabulado';
-$params['primary_key'] = 'tabulado_id';
+$params['primary_key'] = 'tab_id';
 $params['action'] = 'tabulado_delete';
 $params['continue'] = 'tabulado_list';
 
