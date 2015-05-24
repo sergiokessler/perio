@@ -38,11 +38,8 @@ create table nota (
     link text,
     seccion text not null,
     tipo_de_nota text not null,
-    juventud_tema text,
-    juventud_motivo_1 text,
-    juventud_motivo_2 text,
-    seguridad_tema text,
-    seguridad_motivo_1 text,
+    juventud text,
+    seguridad text,
     voz_1 text,
     voz_2 text,
     voz_3 text,
@@ -62,4 +59,12 @@ create virtual table nota_fts using fts4 (
     content text
 );
 
+drop view nota_plus;
+create view nota_plus as
+select 
+    *, 
+    substr(seguridad, 1, instr(seguridad, '/')-2) as seguridad_main,
+    substr(juventud, 1, instr(juventud, '/')-2) as juventud_main
+from 
+    nota; 
 
