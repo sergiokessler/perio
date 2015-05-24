@@ -25,11 +25,8 @@ $boolean_select['NO'] = 'NO';
 $clave_select[''] = '--Seleccione--';
 $clave_select['Sección'] = 'Sección';
 $clave_select['Tipo de nota'] = 'Tipo de nota';
-//$clave_select['Juventud Tema'] = 'Juventud Tema';
-$clave_select['Juventud Motivo 1'] = 'Juventud Motivo 1';
-$clave_select['Juventud Motivo 2'] = 'Juventud Motivo 2';
-//$clave_select['Seguridad Tema'] = 'Seguridad Tema';
-$clave_select['Seguridad Motivo 1'] = 'Seguridad Motivo 1';
+$clave_select['Juventud'] = 'Juventud';
+$clave_select['Seguridad'] = 'Seguridad';
 $clave_select['Voces'] = 'Voces';
 $clave_select['Territorios'] = 'Territorios';
 
