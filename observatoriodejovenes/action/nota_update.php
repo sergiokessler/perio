@@ -71,7 +71,6 @@ else
     include_once 'header.php';
 
     echo '<div class="page-header">';
-    echo '  <img class="pull-right" src="img/logo_sumar_small.png">';
     echo '  <h1>Nota <small>Editando un registro</small></h1>';
     echo '</div>';
 
