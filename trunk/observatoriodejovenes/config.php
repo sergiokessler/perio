@@ -13,8 +13,12 @@ $config['realm'] = 'Observatorio de Jóvenes, FPyCS, UNLP';
 
 
 $config['auth'][] = array('sak@perio.unlp.edu.ar', 'odj.2014');
-$config['auth'][] = array('prueba', 'prueba');
 $config['auth'][] = array('consulta', 'consulta');
+$config['auth'][] = array('Marisol.Martinez', 'mama94');
+$config['auth'][] = array('Lucia.Dallavia', 'luda56');
+$config['auth'][] = array('Alma.Carrasco', 'alca39');
+$config['auth'][] = array('Candela.Luquet', 'calu82');
+
 
 // tmp
 //$_SESSION['u'] = 'prueba';
