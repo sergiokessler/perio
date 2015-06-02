@@ -101,6 +101,13 @@ while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
     $juventud_select[$row['k']] = $row['v'];
 }
 
+$juventud2_select = array('' => '-- Seleccione --');
+$sql_sel = "select valor as k, valor as v from tabulado where clave = 'Juventud 2' order by valor";
+$st = $db->query($sql_sel);
+while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $juventud2_select[$row['k']] = $row['v'];
+}
+
 $seguridad_select = array('' => '-- Seleccione --');
 $sql_sel = "select valor as k, valor as v from tabulado where clave = 'Seguridad' order by valor";
 $st = $db->query($sql_sel);
@@ -224,6 +231,10 @@ $form->addElement('select', 'new_row[juventud]')
      ->setLabel('Juventud:')
      ->loadOptions($juventud_select)
      ->addRule('required', 'Valor requerido')
+     ;
+$form->addElement('select', 'new_row[juventud2]')
+     ->setLabel('Juventud 2:')
+     ->loadOptions($juventud2_select)
      ;
 $form->addElement('select', 'new_row[seguridad]')
      ->setLabel('Seguridad:')

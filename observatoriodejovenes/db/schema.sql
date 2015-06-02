@@ -39,6 +39,7 @@ create table nota (
     seccion text not null,
     tipo_de_nota text not null,
     juventud text,
+    juventud2 text,
     seguridad text,
     voz_1 text,
     voz_2 text,

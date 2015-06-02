@@ -26,6 +26,7 @@ $clave_select[''] = '--Seleccione--';
 $clave_select['Sección'] = 'Sección';
 $clave_select['Tipo de nota'] = 'Tipo de nota';
 $clave_select['Juventud'] = 'Juventud';
+$clave_select['Juventud'] = 'Juventud 2';
 $clave_select['Seguridad'] = 'Seguridad';
 $clave_select['Voces'] = 'Voces';
 $clave_select['Territorios'] = 'Territorios';
