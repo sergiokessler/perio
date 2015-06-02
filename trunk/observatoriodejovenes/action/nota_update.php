@@ -78,13 +78,13 @@ else
      * Un usuario solo puede modificar lo cargado por el mismo
      * excepto saludymedios
      */
-
+/*
     if ( ($_SESSION['u'] != 'admin') and ($_SESSION['u'] != $edit_row['carga_usuario']) ) {
         echo 'Ud. no puede editar este registro, fué cargado por otra persona. Presione el boton de Atras';
         include_once 'footer.php';
         exit();
     }
-
+*/
     // Output javascript libraries, needed by hierselect
     //echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
     $form->render($renderer);

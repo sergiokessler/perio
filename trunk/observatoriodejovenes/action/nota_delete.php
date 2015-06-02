@@ -9,20 +9,16 @@ if (isset($params['record_id'])) {
 }
 
 $sql_record1 = <<<END
-    select 
-        n.nota_id,
-        m.nombre,
-        n.titulo,
-        n.fecha,
-        n.mencion_escala,
-        n.valoracion
+    select
+        n.*,
+        r.*
     from 
         nota n,
-        medio m
+        region r
     where
-        n.medio_id = m.medio_id
+        n.region_id = r.region_id
         and
-        nota_id = ?
+        nota_id = ? 
 END;
 $sql_data = array($record_id);
 
