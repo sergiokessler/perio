@@ -242,7 +242,7 @@ insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fec
 insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fecha') values ('Argentina','Chaco','General José de San Martín','adm', '1900-01-01');
 insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fecha') values ('Argentina','Chaco','Resistencia','adm', '1900-01-01');
 insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fecha') values ('Argentina','Chaco','Roque Saenz Peña','adm', '1900-01-01');
-insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fecha') values ('Argentina','Chaco','Tow'etes Ilhoy','adm', '1900-01-01');
+insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fecha') values ('Argentina','Chaco','Towetes Ilhoy','adm', '1900-01-01');
 insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fecha') values ('Argentina','Chaco','Villa Río Bermejito','adm', '1900-01-01');
 insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fecha') values ('Argentina','Chubut','Área Natural Protegida Meseta de Somuncurá','adm', '1900-01-01');
 insert into region ('pais','provincia', 'localidad', 'carga_usuario', 'carga_fecha') values ('Argentina','Chubut','Comarca Andina del Paralelo 42 ','adm', '1900-01-01');
