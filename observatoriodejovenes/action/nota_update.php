@@ -86,9 +86,9 @@ else
     }
 */
     // Output javascript libraries, needed by hierselect
-    //echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
     $form->render($renderer);
-    echo $renderer;
+    echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
+    echo $renderer;  
 
 
     include_once 'footer.php'; 
