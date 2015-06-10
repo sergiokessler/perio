@@ -148,34 +148,6 @@ if (isset($record_id))
 
 $form = new HTML_QuickForm2('form', 'post', array('role' => 'form'));
 
-// check if update
-if ($form_update)
-{
-    $st = $db->prepare('select * from ' . $params['table'] . ' where ' . $params['primary_key'] . ' = ?'); 
-    $st->execute(array($record_id));
-    $edit_row = $st->fetch(PDO::FETCH_ASSOC);
-    
-    $defaults['new_row'] = $edit_row;
-
-    // custom {
-    $st = $db->prepare('select * from region where region_id = ?'); 
-    $st->execute(array($edit_row['region_id']));
-    $edit_row = $st->fetch(PDO::FETCH_ASSOC);
-
-    $defaults['region'] = array($edit_row['pais'], $edit_row['provincia'], $edit_row['region_id']);
-    // }
-
-    $form->addDataSource(new HTML_QuickForm2_DataSource_Array(
-        $defaults
-    ));
-}
-else
-{
-    // defaults
-    $form->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
-        'new_row' => array('fecha' => time()),
-    )));
-}
 
 // elements
 $form->addElement('hidden', 'action')
@@ -285,6 +257,37 @@ $form->addElement('button', 'btnSubmit', array('type' => 'submit', 'value' => 'G
 
 
 $form->addRecursiveFilter('trim');
+
+
+// check if update
+
+if ($form_update)
+{
+    $st = $db->prepare('select * from ' . $params['table'] . ' where ' . $params['primary_key'] . ' = ?'); 
+    $st->execute(array($record_id));
+    $edit_row = $st->fetch(PDO::FETCH_ASSOC);
+    
+    $defaults['new_row'] = $edit_row;
+
+    // custom {
+    $st = $db->prepare('select * from region where region_id = ?');
+    $st->execute(array($edit_row['region_id']));
+    $edit_row = $st->fetch(PDO::FETCH_ASSOC);
+
+    $defaults['region'] = array($edit_row['pais'], $edit_row['provincia'], $edit_row['region_id']);
+    // }
+
+    $form->addDataSource(new HTML_QuickForm2_DataSource_Array(
+        $defaults
+    ));
+}
+else
+{
+    // defaults
+    $form->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
+        'new_row' => array('fecha' => time()),
+    )));
+}
 
 
 require_once 'HTML/QuickForm2/Renderer.php';
