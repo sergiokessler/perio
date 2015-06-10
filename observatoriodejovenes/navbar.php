@@ -20,10 +20,13 @@
       </ul>
 <?php
 
+$q = empty($_GET['q']) ? '' : $_GET['q'];
+
 $html_search = <<< END
       <form class="navbar-form navbar-left" role="search">
+        <input type="hidden" name="action" value="nota_search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="buscar notas...">
+          <input type="text" name="q" class="form-control" placeholder="buscar notas..." value="$q">
         </div>
         <button type="submit" class="btn btn-primary">Buscar</button>
       </form>
