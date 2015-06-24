@@ -24,7 +24,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/print.css" media="print" rel="stylesheet">
 
-
+    <link href="share/chartist.min.css" rel="stylesheet">
   </head>
   <body>
 
