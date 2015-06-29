@@ -167,9 +167,9 @@ new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
 END;
 
 //echo '<link href="share/chartist.min.css" rel="stylesheet">';
-echo '<script src="share/chartist.min.js"></script>';
-echo '<div class="ct-chart ct-golden-section"></div>';
-echo $chart;
+//echo '<script src="share/chartist.min.js"></script>';
+//echo '<div class="ct-chart ct-golden-section"></div>';
+//echo $chart;
 
 echo '<p>Cantidad total de notas: ';
 $st = $db->prepare($sql_count);

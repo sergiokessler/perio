@@ -24,7 +24,8 @@
               
               <li <?php echo($active=='Tabulado' ? 'class="active"' : '')?>><a href="?action=tabulado_list">Tabulado</a></li>
 
-              <li class="nav-header">Reportes</li>
+              <li <?php echo($active=='Reportes' ? 'class="active"' : '')?>><a href="?action=report">Reportes</a></li>
+
 <!--
               <li <?php $o='report_pcia_medio_cant'; echo($action==$o ? 'class="active"' : '')?>><a href="?action=<?php echo $o?>">Res?men por Pcia y Medio</a></li>
               <li <?php $o='report_totales'; echo($action==$o ? 'class="active"' : '')?>><a href="?action=<?php echo $o?>">Totales</a></li>
