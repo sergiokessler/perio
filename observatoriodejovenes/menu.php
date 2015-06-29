@@ -14,6 +14,8 @@
                 if (strpos($action, 'nota') !== false) $active = 'Notas';
                 if (strpos($action, 'medio') !== false) $active = 'Medios';
                 if (strpos($action, 'region') !== false) $active = 'Regiones';
+                if (strpos($action, 'tabulado') !== false) $active = 'Tabulado';
+                if (strpos($action, 'report') !== false) $active = 'Reportes';
               ?>
 
               <li <?php echo($active=='Notas' ? 'class="active"' : '')?>><a href="?action=nota_list">Notas</a></li>
