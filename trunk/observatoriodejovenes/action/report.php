@@ -12,10 +12,10 @@
 unset($data_menu_rep);
 
 $data_menu_rep[]= array (
-    'title' => 'Cantidad de notas por año', 
-    'url'   => 'index.php?action=report_nota_anio'
+    'title' => 'Cantidad de notas por medio', 
+    'url'   => 'index.php?action=report_medio'
 );
-
+/*
 $data_menu_rep[]= array (
     'title' => 'Cantidad de notas por año y por medio', 
     'url'   => 'index.php?action=report_nota_anio_medio'
@@ -59,11 +59,14 @@ $data_menu_rep[]= array (
     'title' => 'Cantidad de notas por año, por mes y por contenido', 
     'url'   => 'index.php?action=report_nota_anio_mes_contenido'
 );
+*/
 
 include_once 'header.php';
 
-echo 'Reportes:';
-echo '<br>';
+echo '<div class="page-header">';
+echo '  <h1>Listado de reportes</h1>';
+echo '</div>'; 
+
 echo '<br>';
 echo '<div id="menucontainer">';
 echo '<ul id="navlist">';
