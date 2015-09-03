@@ -17,9 +17,9 @@
     ?>  
     </title> 
 
-    <link rel="stylesheet" type="text/css" href="print.css" media="print">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="stylesheet" href="style-responsive.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- <link rel="stylesheet" href="style-responsive.css" type="text/css"> -->
 
     <style type="text/css">
         body {
