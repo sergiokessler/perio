@@ -10,7 +10,7 @@
 include_once 'header.php';
 
 
-if ($_SESSION['logged_in']) {
+if (isset($_SESSION['logged_in'])) {
     include 'menu_in.php';
 } else {
     include 'menu_out.php';
