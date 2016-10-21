@@ -8,6 +8,7 @@ require_once 'lib/data_utils.php';
 
 $params['table'] = 'lista';
 $params['primary_key'] = 'lista_id';
+$params['seq'] = 'lista_lista_id_seq';
 $params['action'] = 'lista_insert';
 $params['continue'] = 'lista';
 // <query> 
@@ -55,7 +56,7 @@ if ( (isset($_REQUEST['btnSubmit']))
     }
     
     $msg = "El registro ha sido ingresado satisfactoriamente.";
-    $record_id = $db->lastInsertId();   
+    $record_id = $db->lastInsertId($params['seq']);
     /*
      * end insert the record
      ****************************************************************/
