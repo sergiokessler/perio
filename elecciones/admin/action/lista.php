@@ -24,6 +24,8 @@ $sql = <<<END
         lista_id
     from 
         lista 
+    where
+        lista_id = ?
 END;
 $sql_params = array($record_id);
 

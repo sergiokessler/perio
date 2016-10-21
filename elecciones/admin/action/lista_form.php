@@ -61,6 +61,18 @@ if (isset($record_id))
 
 $form = new HTML_QuickForm2('form', 'post', array('role' => 'form'));
 
+if ($form_update and empty($_POST))
+{
+    $st = $db->prepare('select * from ' . $params['table'] . ' where ' . $params['primary_key'] . ' = ?'); 
+    $st->execute(array($record_id));
+    $edit_row = $st->fetch(PDO::FETCH_ASSOC);
+
+    $defaults['new_row'] = $edit_row;
+
+    $form->addDataSource(new HTML_QuickForm2_DataSource_Array(
+        $defaults
+    ));
+} 
 
 // elements
 $form->addElement('hidden', 'action')
