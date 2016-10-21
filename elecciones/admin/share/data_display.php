@@ -2,6 +2,7 @@
 
 // $Id: data_display.php,v 1.1 2007/10/10 17:15:47 develop Exp $
 
+require_once 'DB.php';
 require_once 'HTML/QuickForm.php'; 
 require_once 'share/data_utils.php';
 

@@ -6,7 +6,7 @@ $Id: premio.php,v 1.2 2007/10/17 18:03:18 develop Exp $
 
 */
 
-require_once 'share/data_display.php';
+require_once 'lib/data_display.php';
 
 
 //unset($params);
@@ -41,10 +41,21 @@ $buscar = (bool) (isset($_REQUEST['btnSubmit'])) && ($_REQUEST['btnSubmit'] == '
 if ($buscar)
 {                            
     $params = sak_search_form_process($params);
-    echo sak_display_list($params);
-} else {
-    echo sak_display_list($params);
 }
+
+
+$sql = $params['sql_list'] . $params['sql_where'] . $params['sql_order'];
+$sql_data = $params['sql_data'];
+
+
+$db = new PDO($db_dsn, $db_user, $db_pass);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+
+$st = $db->prepare($sql);
+$st->execute($sql_data);
+
+echo sak_display_array_list($params);
 
 
 include_once 'footer.php';
