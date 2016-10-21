@@ -11,8 +11,8 @@ if ( (isset($_POST['u']))
 }
 
 
-if (!isset($_SESSION['logged_in']) and $action != 'login') {
-    $action = 'home';
+if (!isset($_SESSION['logged_in']) and (!empty($_REQUEST['action']))) {
+    $action = 'login';
     return;
 }
 
