@@ -11,7 +11,7 @@ include 'header.php';
 
 $sql = <<<END
     select 
-        to_ascii(urna_nombre) as urna_nombre,
+        urna_nombre,
         urna_id
     from 
         urna
