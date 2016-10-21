@@ -15,7 +15,7 @@ require_once 'lib/data_utils.php';
 $this_table = 'urna';
 $this_primary_key = 'urna_id';
 $this_seq = 'urna_urna_id_seq';
-$this_action = 'urna_insert';
+$this_action = 'urna_update';
 $this_continue = 'urna_list';
 $this_icon = '<span class="glyphicon glyphicon-folder-close"></span>'; 
 
