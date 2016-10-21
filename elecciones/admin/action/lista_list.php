@@ -18,7 +18,7 @@ $sql = <<<END
         participa_centro,
         participa_claustro,
         color,
-        lista_id as info
+        lista_id
     from 
         lista
     order by
@@ -52,7 +52,7 @@ if (empty($params['data'])) {
     echo ('No se encontraron datos');
 } else {
     $params['primary_key'] = 'lista_id';
-    $params['link_view']['lista_id']['label'] = 'Ver registro';
+//    $params['link_view']['lista_id']['label'] = 'Ver registro';
     $params['link_view']['lista_id']['href'] = '?action=lista';
     $params['display_record_count'] = true;
 
