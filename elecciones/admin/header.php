@@ -24,20 +24,9 @@ $data_menu[]= array (
                 'url' => 'index.php?action=logout'
                );
 
-echo '<nav class="navbar navbar-default" role="navigation">';
 echo '<div class="container">';
-echo '<ul id="navlist" class="nav nav-pills navbar-right">';
-foreach ($data_menu as $menu)
-{
-    echo '<li class="btn navbar-btn"><a href="' . $menu['url'] . '">' . $menu['title'] . '</a></li>';
-}
-echo '</ul>';
-echo '</div>';
-echo '</nav>';
-
-
-echo '<div class="container">';
-//echo '<center>';
+echo '<div class="container-fluid">';
+echo '<img style="margin:0;padding:0" src="../images/bgbody.png">';
 echo '<div id="header">';
 echo '<img src="../images/logoperio.png" class="logoperio">';
 echo '<h1 class="tituloh1">';
@@ -45,6 +34,22 @@ echo "&nbsp; Elecciones $anio<br>";
 echo '</h1>';
 echo '<img src="../images/logosevit.png" class="logosevit">';
 echo '<div class="clear"></div>';
+echo '</div>';
+echo '</div>';
+
+echo '<div class="container">';
+echo '<nav class="navbar navbar-default" role="navigation">';
+echo '<div class="container-fluid">';
+echo '<div id="navbar" class="navbar-collapse collapse">';
+echo '<ul id="navlist" class="nav nav-pills navbar-right">';
+foreach ($data_menu as $menu)
+{
+    echo '<li class="btn navbar-btn"><a href="' . $menu['url'] . '">' . $menu['title'] . '</a></li>';
+}
+echo '</ul>';
+echo '</div>';
+echo '</div>';
+echo '</nav>';
 echo '</div>';
 
 if (isset($params['msg'])) {

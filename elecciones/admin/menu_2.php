@@ -45,6 +45,8 @@ $data_menu_op[] = array (
 );
 
 
+echo '<div class="container">';
+echo '<div class="container-fluid">';
 echo '<br>';
 echo 'Menu Operador, seleccione una opcion:';
 echo '<br>';
@@ -59,6 +61,8 @@ foreach ($data_menu_op as $menu)
     echo '<p class="list-group-item-text">...</p>';
     echo '</a>';
 }
+echo '</div>';
+echo '</div>';
 echo '</div>';
 echo '</div>';
 

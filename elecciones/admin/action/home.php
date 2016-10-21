@@ -16,4 +16,3 @@ include_once 'menu_2.php';
 include_once 'footer.php';
 
 
-?>
