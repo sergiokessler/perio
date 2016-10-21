@@ -13,7 +13,7 @@ if (isset($params['record_id'])) {
 $params['table'] = 'urna';
 $params['primary_key'] = 'urna_id';
 $params['action'] = 'urna_update';
-$params['continue'] = 'urna';
+$params['continue'] = 'urna_list';
 
 $sql_record1 = <<<END
     select 
