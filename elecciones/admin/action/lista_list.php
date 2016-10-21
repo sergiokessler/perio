@@ -29,6 +29,16 @@ $st->execute($sql_data);
 unset($params);
 $params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
 
+include 'header.php';
+
+echo '<div class="page-header">';
+echo '  <h1>Listado de Listas <small></small></h1>';
+echo '<a href="?action=lista_insert" class="btn btn-default active" role="button">Agregar Lista</a>';
+//echo '<span style="color:lightgray"> &nbsp;|&nbsp; </span>';
+//echo '<a href="?action=nota_search">Buscar Notas</a>';
+echo '</div>';
+
+
 if (empty($params['data'])) {
     echo ('No se encontraron datos');
 } else {
