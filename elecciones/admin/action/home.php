@@ -10,7 +10,11 @@
 include_once 'header.php';
 
 
-include_once 'menu_2.php';
+if ($_SESSION['logged_in']) {
+    include 'menu_in.php';
+} else {
+    include 'menu_out.php';
+}
 
 
 include_once 'footer.php';

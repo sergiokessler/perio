@@ -74,4 +74,3 @@ if (!isset($_SESSION['logged_in']))
     include 'footer.php';
 }
 
-?>
