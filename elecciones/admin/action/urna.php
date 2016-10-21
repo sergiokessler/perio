@@ -1,60 +1,68 @@
 <?php
 
-/*
- * by Sak@perio
- */
-# vim: set fileencoding=ISO-8859-1 
+if (empty($params['record_id'])) {
+    echo 'Debe seleccionar un registro. Presione el boton de Atras';
+    die();
+} else {
+    $record_id = $params['record_id'];
+}  
 
-require_once 'share/data_display.php';
+require_once 'lib/data_display.php';
 
 
-//unset($params);
-$params['table'] = 'urna';
-$params['sql_list'] = 'select * from ' . $params['table'];
-$params['sql_where'] = '';
-$params['sql_order'] = '';
-$params['sql_data'] = null;
-$params['primary_key'] = $params['table'] . '_id';
-$params['link_view']['field_name'] = $params['primary_key'];
-$params['link_view']['action'] = $params['table'] . '_select';
-$params['display_record_count'] = true;
-//$params['enable_export'] = true;
-
-$field_meta['search']['urna_nombre'] = 'Nombre de Urna';
-
+$sql = <<<END
+    select 
+        urna_nombre,
+        urna_id
+    from 
+        urna 
+    where
+        urna_id = ?
+END;
+$sql_params = array($record_id);
 
 
 
-include_once 'header.php';
 
-echo sak_search_form($params, $field_meta);
+include 'header.php';
 
-$insert_title = 'Agregar registro';
-$insert_url = 'index.php?action=' . $params['table'] . '_insert';
-echo "<a href=\"$insert_url\">$insert_title</a>";
+unset($params_cont);
+$params_cont['record_id'] = $record_id;
+$params_cont['continue'] = 'urna';
+$params_cont = params_encode($params_cont);
+
+$action1 = '?action=urna_update&params=' . $params_cont;
+$action2 = '?action=urna_delete&params=' . $params_cont; 
+
+echo '<div>';
+echo '<h1><span class="glyphicon glyphicon-user"></span> Datos de la Urna <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
+echo '<br>';
+//echo '<a href="?action=user_change_pass" class="btn btn-default active" role="button">Agregar Usuario</a>'; 
+echo '<a href="' . $action1 . '" class="btn btn-default active" role="button">Editar Urna</a> ';
+echo '<a href="' . $action2 . '" class="btn btn-default active" role="button">Eliminar Urna</a> ';
 echo '<br>';
 echo '<br>';
+echo '</div>';
 
-
-$buscar = (bool) (isset($_REQUEST['btnSubmit'])) && ($_REQUEST['btnSubmit'] == 'Buscar');
-if ($buscar)
-{                            
-    $params = sak_search_form_process($params);
-}
 
 $db = new PDO($db_dsn, $db_user, $db_pass);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
-$sql = $params['sql_list'] . $params['sql_where'] . $params['sql_order'];
-$sql_data = $params['sql_data'];
+$st = $db->prepare($sql); 
+$st->execute($sql_params);
 
-$st = $db->prepare($sql);
-$st->execute($sql_data);
-$params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
 
-echo sak_display_array_list($params);
+unset($params);
+$params['data'] = $st->fetch(PDO::FETCH_ASSOC);
 
-include_once 'footer.php';
+if (empty($params['data'])) {
+    echo ('No se encontraron datos');
+} else {
+    echo sak_display_array_record($params);
+} 
+
+
+include 'footer.php';
 
 

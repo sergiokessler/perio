@@ -1,57 +1,20 @@
 <?php
 
-/*
-
-$Id: premio_insert.php,v 1.4 2007/10/17 18:01:25 develop Exp $
-
-*/
+# vim: set fileencoding=ISO-8859-1 
 
 
-require_once 'share/data_manage.php';
-require_once 'share/data_utils.php';
+require_once 'lib/data_utils.php';
+
 
 $params['table'] = 'urna';
-$params['primary_key'] = $params['table'] . '_id';
-$params['op'] = 'insert';
-
+$params['primary_key'] = 'urna_id';
+$params['action'] = 'urna_insert';
+$params['continue'] = 'urna';
 // <query> 
 
 
+include 'action/urna_form.php';
 
-$field_meta['type']['insert'][$params['primary_key']] = 'disable';
-$field_meta['type']['update'][$params['primary_key']] = 'hidden';
-
-/*
-$field_meta['defaults']['fecha_desde'] = $date_defaults;
-$field_meta['defaults']['fecha_hasta'] = $date_defaults;
-//$field_meta['type']['insert']['producto_codigo'] = 'disable';
-//$field_meta['type']['update']['producto_codigo'] = 'hidden';
-$field_meta['select']['activa']['data']['1'] = 'Si';
-$field_meta['select']['activa']['data']['0'] = 'No';
-$field_meta['select']['en_total']['data']['1'] = 'Si';
-$field_meta['select']['en_total']['data']['0'] = 'No';
-$field_meta['select']['en_porcentaje']['data']['1'] = 'Si';
-$field_meta['select']['en_porcentaje']['data']['0'] = 'No';
- */
-
-
-$form =& sak_record_form($params, $field_meta);
-
-$header = $form->createElement('header', 'MyHeader', 'Agregar registro en ' . $params['table'] . ':');
-$form->insertElementBefore($header, 'op');
-$form->addElement('hidden', 'action', $params['table'] . '_insert');
-$form->addElement('submit', 'btnSubmit', 'Guardar');
-
-
-// defaults del form
-
-/*
-$form->setDefaults(array(
-    'agenda_fecha_hora' => $date_defaults,
-));
-*/
-
-// defaults
 
 
 
@@ -61,31 +24,62 @@ if ( (isset($_REQUEST['btnSubmit']))
      and
      ($form->validate()) )
 {
+    $db = new PDO($db_dsn, $db_user, $db_pass);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
     $new_row = cleanup_new_row($_POST['new_row']);
 
-    $db = DB::connect($config['db']);
-    if (PEAR::isError($db)) die($db->getMessage());
 
-    $res = $db->autoExecute($params['table'], $new_row, DB_AUTOQUERY_INSERT);
-    if (PEAR::isError($res)) die($res->getMessage());
-    $msg = "El registro a sido cargado satisfactoriamente.";
 
-                                  
+    /****************************************************************
+     * insert the record
+     */
+    $cols = implode(', ', array_keys($new_row));
+    $vals = implode(', ', array_fill(0, count($new_row), '?'));
+
+    $sql = "insert into $params[table] ($cols) values ($vals)";
+    $sql_data = array_values($new_row);
+
+    $st = $db->prepare($sql);
+    $st->execute($sql_data);
+    
+    $msg = "El registro ha sido ingresado satisfactoriamente.";
+    $record_id = $db->lastInsertId();   
+    /*
+     * end insert the record
+     ****************************************************************/
+
+
     unset($params_cont);
     $params_cont['msg'] = $msg;
+    $params_cont['record_id'] = $record_id;
     $params_cont = params_encode($params_cont);
 
-    $continue = 'action=' . $params['table'] . '&params=' . $params_cont;
+    $continue = '?action=' . $params['continue'] . '&params=' . $params_cont;
 }
 else
 {
     // <UI>
-    include_once 'header.php';
+    include 'header.php';
+
+    echo '<div class="page-header">';
+    echo '  <h1>' . ucfirst($params['table']) . '<small>Ingresando un registro</small></h1> (Puede pasar de campo usando la tecla Tab)';
+    echo '</div>';
+
     echo '<br>';
-    $form->display();
-    include_once 'footer.php';
+    echo "\n\n";
+
+
+    // Output javascript libraries, needed by hierselect
+    $form->render($renderer);
+    echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
+    echo $renderer;  
+    //echo $form;
+
+    echo '<br>';
+
+    include 'footer.php';
 }
 
 
-?>
