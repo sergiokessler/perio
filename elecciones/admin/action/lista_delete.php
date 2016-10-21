@@ -26,9 +26,11 @@ $sql_record1 = <<<END
         participa_centro,
         participa_claustro,
         color,
-        lista_id as info
+        lista_id
     from 
         lista
+    where
+        lista_id = ? 
 END;
 $sql_data = array($record_id);
 
