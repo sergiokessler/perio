@@ -11,7 +11,7 @@ include 'header.php';
 
 $sql = <<<END
     select 
-        urna_nombre,
+        to_ascii(urna_nombre) as urna_nombre,
         urna_id
     from 
         urna
@@ -35,7 +35,7 @@ $params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
 
 echo '<div class="page-header">';
 echo '  <h1>Listado de Urnas <small></small></h1>';
-echo '<a href="?action=urna_insert" class="btn btn-default active" role="button">Agregar Lista</a>';
+echo '<a href="?action=urna_insert" class="btn btn-default active" role="button">Agregar Urna</a>';
 //echo '<span style="color:lightgray"> &nbsp;|&nbsp; </span>';
 //echo '<a href="?action=nota_search">Buscar Notas</a>';
 echo '</div>';
@@ -46,7 +46,7 @@ if (empty($params['data'])) {
 } else {
     $params['primary_key'] = 'urna_id';
 //    $params['link_view']['lista_id']['label'] = 'Ver registro';
-    $params['link_view']['lista_id']['href'] = '?action=urna';
+    $params['link_view']['urna_id']['href'] = '?action=urna';
     $params['display_record_count'] = true;
 
     echo sak_display_array_list($params);
