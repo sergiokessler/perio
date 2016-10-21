@@ -1,10 +1,9 @@
 <?php
 
 /*
-
-$Id: premio.php,v 1.2 2007/10/17 18:03:18 develop Exp $
-
-*/
+ * by Sak@perio
+ */
+# vim: set fileencoding=ISO-8859-1
 
 require_once 'lib/data_display.php';
 
@@ -39,21 +38,21 @@ echo '<br>';
 
 $buscar = (bool) (isset($_REQUEST['btnSubmit'])) && ($_REQUEST['btnSubmit'] == 'Buscar');
 if ($buscar)
-{                            
+{
     $params = sak_search_form_process($params);
 }
-
-
-$sql = $params['sql_list'] . $params['sql_where'] . $params['sql_order'];
-$sql_data = $params['sql_data'];
 
 
 $db = new PDO($db_dsn, $db_user, $db_pass);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
+$sql = $params['sql_list'] . $params['sql_where'] . $params['sql_order'];
+$sql_data = $params['sql_data'];
+
 $st = $db->prepare($sql);
 $st->execute($sql_data);
+$params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
 
 echo sak_display_array_list($params);
 
