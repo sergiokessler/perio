@@ -9,7 +9,16 @@ require_once 'lib/data_display.php';
 
 $sql = <<<END
     select 
-        *
+        orden,
+        lista_nombre,
+        lista_nombre_corto as nombre_corto,
+        activa,
+        en_total,
+        en_porcentaje,
+        participa_centro,
+        participa_porcentaje,
+        color,
+        lista_id as info
     from 
         lista
     order by
@@ -47,7 +56,7 @@ if (empty($params['data'])) {
     $params['link_view']['lista_id']['href'] = '?action=lista';
     $params['display_record_count'] = true;
 
-    echo sak_display_array_list($params, $field_mapping);
+    echo sak_display_array_list($params);
 } 
 
  //$params['enable_export'] = true;

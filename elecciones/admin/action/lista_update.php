@@ -1,48 +1,26 @@
 <?php
 
-/*
+# vim: set fileencoding=ISO-8859-1
 
-$Id: premio_update.php,v 1.1 2007/10/10 17:15:47 develop Exp $
+if (isset($params['record_id'])) {
+    $record_id = $params['record_id'];
+} else {
+    echo 'Debe seleccionar un registro. Presione el boton de Atras';
+    exit();
+} 
 
-*/
+require_once 'lib/data_utils.php';
+require_once 'lib/password.php';
 
-
-require_once 'share/data_manage.php';
 
 $params['table'] = 'lista';
-$params['primary_key'] = $params['table'] . '_id';
-$params['op'] = 'update';
-
-$date_defaults = array(
-    'd' => date('d'),
-    'M' => date('m'),
-    'Y' => date('Y'),
-); 
-
+$params['primary_key'] = 'lista_id';
+$params['action'] = 'lista_update';
+$params['continue'] = 'lista';
 // <query> 
 
-$field_meta['defaults']['fecha_desde'] = $date_defaults;
-$field_meta['defaults']['fecha_hasta'] = $date_defaults;
-$field_meta['type']['insert'][$params['primary_key']] = 'disable';
-$field_meta['type']['update'][$params['primary_key']] = 'hidden';
-$field_meta['select']['activa']['data']['1'] = 'Si';
-$field_meta['select']['activa']['data']['0'] = 'No';
-$field_meta['select']['en_total']['data']['1'] = 'Si';
-$field_meta['select']['en_total']['data']['0'] = 'No';
-$field_meta['select']['en_porcentaje']['data']['1'] = 'Si';
-$field_meta['select']['en_porcentaje']['data']['0'] = 'No';
-$field_meta['select']['participa_centro']['data']['1'] = 'Si';
-$field_meta['select']['participa_centro']['data']['0'] = 'No';
-$field_meta['select']['participa_claustro']['data']['1'] = 'Si';
-$field_meta['select']['participa_claustro']['data']['0'] = 'No';
 
-
-$form =& sak_record_form($params, $field_meta);
-
-$header = $form->createElement('header', 'MyHeader', 'Editando registro en ' . $params['table'] . ':');
-$form->insertElementBefore($header, 'op');
-$form->addElement('hidden', 'action', $params['table'] . '_update');
-$form->addElement('submit', 'btnSubmit', 'Guardar');
+include 'action/lista_form.php';
 
 
 
@@ -52,32 +30,63 @@ if ( (isset($_REQUEST['btnSubmit']))
      ($_REQUEST['btnSubmit'] == 'Guardar')
      and
      ($form->validate()) )
-{                            
+{
+    $db = new PDO($db_dsn, $db_user, $db_pass);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+
     $new_row = cleanup_new_row($_POST['new_row']);
 
-    $db = DB::connect($config['db']);
-    if (PEAR::isError($db)) die($db->getMessage());
 
-    $record_id = $params['record_id'];
-    $res = $db->autoExecute($params['table'], $new_row, DB_AUTOQUERY_UPDATE, "$params[primary_key] = $record_id");
-    if (PEAR::isError($res)) die($res->getMessage());
-    $msg = "El registro a sido modificado satisfactoriamente.";
-                                  
+
+    /***********************************************************
+     * update the record
+     **/
+    $set = implode('=?, ', array_keys($new_row));
+    $set .= '=?';
+
+    $sql = "update $params[table] set $set where $params[primary_key] = ?";
+
+    $sql_data = array_values($new_row);
+    $sql_data[] = $record_id;
+
+    $st = $db->prepare($sql);
+    $st->execute($sql_data);
+    /**
+     ***********************************************************/ 
+
+    $msg = "El registro a sido actualizado satisfactoriamente."; 
+
     unset($params_cont);
     $params_cont['msg'] = $msg;
-    $params_cont['record_id'] = $params['record_id'];
+    $params_cont['record_id'] = $record_id;
     $params_cont = params_encode($params_cont);
 
-    $continue = 'action=' . $params['table'] . '&params=' . $params_cont;
+    $continue = '?action=' . $params['continue'] . '&params=' . $params_cont;
 }
 else
 {
     // <UI>
     include_once 'header.php';
+
+    echo '<div class="page-header">';
+    echo '  <h1>Lista ' . $record_id . ' <small>Edición</small></h1> (Puede pasar de campo usando la tecla Tab)';
+    echo '</div>';
+
     echo '<br>';
-    $form->display();
+    echo "\n\n";
+
+ 
+
+    // Output javascript libraries, needed by hierselect
+    $form->render($renderer);
+    echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
+    echo $renderer;  
+    //echo $form;
+
+    echo '<br>';
+
     include_once 'footer.php';
 }
 
 
-?>

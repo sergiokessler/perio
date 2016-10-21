@@ -74,7 +74,7 @@ else
     include 'header.php';
 
     echo '<div class="page-header">';
-    echo '  <h1>Usuario <small>Ingresando un registro</small></h1> (Puede pasar de campo usando la tecla Tab)';
+    echo '  <h1>' . ucfirst($params['table']) . '<small>Ingresando un registro</small></h1> (Puede pasar de campo usando la tecla Tab)';
     echo '</div>';
 
     echo '<br>';
