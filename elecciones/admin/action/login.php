@@ -19,20 +19,6 @@ if ( (isset($_POST['u']))
     {
         $login_success = true;
     }
-    elseif(isset($config['user_table']))
-    {
-        require_once 'DB.php';
-        $db = DB::connect($config['db']);
-        if (PEAR::isError($db)) die($db->getMessage());
-
-        $user_sql = 'select * from ' . $config['user_table'] 
-                  . ' where ' . $config['user_name_field'] . ' = ? and ' . $config['user_passwd_field'] . ' = ? ';
-        $user_row = $db->getRow($user_sql, $login, DB_FETCHMODE_ASSOC);
-
-        if (isset($user_row[$config['user_name_field']])) {
-            $login_success = true;
-        }
-    }
 
     if ($login_success)
     {
@@ -40,7 +26,7 @@ if ( (isset($_POST['u']))
         $_SESSION['logged_in'] = $config['realm'];
         $_SESSION['u'] = $_POST['u'];
         $_SESSION['p'] = $_POST['p'];
-        $continue = 'action=welcome';
+        $continue = 'action=home';
 //        echo '<pre>'; var_dump($_SESSION); echo '</pre>';
     } else
     {
@@ -52,24 +38,41 @@ if (!isset($_SESSION['logged_in']))
 {
     include 'header.php';
 
-    echo '<center>';
+
+    echo '<div class="container">';
+    echo '<div class="row">';
+    echo '<div class="col-sm-6 col-md-4 col-md-offset-4">';
+    echo '<br>';
+
     if (!empty($config['title'])) {
         echo '<h1>' . $config['title'] . '</h1>';
     }
 
-    if (isset($msg))
-    {
-        echo $msg . '<br><br>';
+    if (isset($msg)) {
+        echo '<div class="alert alert-warning">';
+        echo $msg;
+        echo '</div>';
     }
 
     echo '<form id="login" method="post">';
     echo '<input type="hidden" name="action" value="login">';
-    echo 'Usuario: <input name="u" value="" id="u">';
-    echo ' Clave: <input type="password" name="p" value="" id="p">';
-    echo ' <input type="submit" name="submit" value="Entrar">';
+    echo '<div class="form-group">';
+    echo '<label for="u" class="cols-sm-2 control-label">Usuario:</label>';
+    echo '<input type="text" name="u" value="" id="u">';
+    echo '</div>';
+    echo '<div class="form-group">';
+    echo '<label for="p" class="cols-sm-2 control-label">Clave:</label>';
+    echo '<input type="password" name="p" value="" id="p">';
+    echo '</div>';
+    echo '<div class="form-group">';
+    echo '<button type="submit" class="btn btn-lg btn-primary" name="submit">Entrar</button>';
+    echo '</div>';
     echo '</form>';
 
-    echo '</center>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+
 
     include 'footer.php';
 }
