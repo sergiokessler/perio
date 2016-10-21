@@ -47,8 +47,9 @@ echo '<img src="../images/logosevit.png" class="logosevit">';
 echo '<div class="clear"></div>';
 echo '</div>';
 
-
-
-if (isset($params['msg']))
-    echo '<div style="text-align:right">' . $params['msg'] . '</div>'; 
+if (isset($params['msg'])) {
+    echo '<div class="alert alert-success">';
+    echo $params['msg'];
+    echo '</div>';
+}
 

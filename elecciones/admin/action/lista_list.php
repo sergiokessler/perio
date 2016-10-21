@@ -7,6 +7,8 @@
 
 require_once 'lib/data_display.php';
 
+include 'header.php';
+
 $sql = <<<END
     select 
         orden,
@@ -38,7 +40,6 @@ $st->execute($sql_data);
 unset($params);
 $params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
 
-include 'header.php';
 
 echo '<div class="page-header">';
 echo '  <h1>Listado de Listas <small></small></h1>';
