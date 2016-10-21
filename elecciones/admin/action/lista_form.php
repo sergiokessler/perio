@@ -63,6 +63,10 @@ $form = new HTML_QuickForm2('form', 'post', array('role' => 'form'));
 
 if ($form_update and empty($_POST))
 {
+    $db = new PDO($db_dsn, $db_user, $db_pass);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+    
     $st = $db->prepare('select * from ' . $params['table'] . ' where ' . $params['primary_key'] . ' = ?'); 
     $st->execute(array($record_id));
     $edit_row = $st->fetch(PDO::FETCH_ASSOC);
