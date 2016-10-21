@@ -6,11 +6,13 @@
 require_once 'lib/data_utils.php';
 
 
-$params['table'] = 'urna';
-$params['primary_key'] = 'urna_id';
-$params['seq'] = 'urna_urna_id_seq';
-$params['action'] = 'urna_insert';
-$params['continue'] = 'urna';
+$this_table = 'urna';
+$this_primary_key = 'urna_id';
+$this_seq = 'urna_urna_id_seq';
+$this_action = 'urna_insert';
+$this_continue = 'urna';
+$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
+
 // <query> 
 
 
@@ -39,14 +41,14 @@ if ( (isset($_REQUEST['btnSubmit']))
     $cols = implode(', ', array_keys($new_row));
     $vals = implode(', ', array_fill(0, count($new_row), '?'));
 
-    $sql = "insert into $params[table] ($cols) values ($vals)";
+    $sql = "insert into $this_table ($cols) values ($vals)";
     $sql_data = array_values($new_row);
 
     $st = $db->prepare($sql);
     $st->execute($sql_data);
     
     $msg = "El registro ha sido ingresado satisfactoriamente.";
-    $record_id = $db->lastInsertId($params['seq']);
+    $record_id = $db->lastInsertId($this_seq);
     /*
      * end insert the record
      ****************************************************************/
@@ -57,7 +59,7 @@ if ( (isset($_REQUEST['btnSubmit']))
     $params_cont['record_id'] = $record_id;
     $params_cont = params_encode($params_cont);
 
-    $continue = '?action=' . $params['continue'] . '&params=' . $params_cont;
+    $continue = '?action=' . $this_continue . '&params=' . $params_cont;
 }
 else
 {
@@ -65,7 +67,7 @@ else
     include 'header.php';
 
     echo '<div class="page-header">';
-    echo '  <h1>' . ucfirst($params['table']) . ' <small>Ingresando un registro</small></h1> (Puede pasar de campo usando la tecla Tab)';
+    echo '  <h1>' . ucfirst($this_table) . ' <small>Ingresando un registro</small></h1> (Puede pasar de campo usando la tecla Tab)';
     echo '</div>';
 
     echo '<br>';

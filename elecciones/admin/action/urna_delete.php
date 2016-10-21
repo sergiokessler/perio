@@ -10,10 +10,11 @@ if (isset($params['record_id'])) {
 }
 
 
-$params['table'] = 'urna';
-$params['primary_key'] = 'urna_id';
-$params['action'] = 'urna_update';
-$params['continue'] = 'urna_list';
+$this_table = 'urna';
+$this_primary_key = 'urna_id';
+$this_action = 'urna_update';
+$this_continue = 'urna_list';
+$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
 
 $sql_record1 = <<<END
     select 
@@ -44,18 +45,18 @@ if ( (isset($_POST['btnSubmit']))
      and
      ($_POST['btnSubmit'] == $btnSubmitValue) )
 {
-    $sql = "delete from $params[table] where $params[primary_key] = ?";
+    $sql = "delete from $this_table where $this_primary_key = ?";
     $sql_data = array($record_id);
     
     $st = $db->prepare($sql);
     $st->execute($sql_data);
     
-    $msg = "La Lista <em>$record_id</em> ha sido eliminada satisfactoriamente.";
+    $msg = "La $this_table <em>$record_id</em> ha sido eliminada satisfactoriamente.";
     
     $params_cont = null;
     $params_cont['msg'] = $msg;
 
-    $continue = '?action=' . $params['continue'] . '&params=' . params_encode($params_cont);
+    $continue = '?action=' . $this_continue . '&params=' . params_encode($params_cont);
     return;
 }
 
@@ -63,7 +64,7 @@ if ( (isset($_POST['btnSubmit']))
 include 'header.php';
 
 echo '<div>';
-echo '<h1><span class="glyphicon glyphicon-user"></span> Eliminando la Urna <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
+echo '<h1>' . $this_icon . ' Eliminando la ' . $this_table . ' <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
 echo '<br>';
 echo '<br>';
 echo '</div>';

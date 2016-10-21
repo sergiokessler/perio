@@ -9,6 +9,10 @@ require_once 'lib/data_display.php';
 
 include 'header.php';
 
+$this_table = 'urna';
+$this_primary_key = 'urna_id';
+$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
+
 $sql = <<<END
     select 
         urna_nombre,
@@ -34,8 +38,8 @@ $params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
 
 
 echo '<div class="page-header">';
-echo '  <h1>Listado de Urnas <small></small></h1>';
-echo '<a href="?action=urna_insert" class="btn btn-default active" role="button">Agregar Urna</a>';
+echo '  <h1>Listado de '. $this_table .' <small></small></h1>';
+echo '<a href="?action='. $this_table .'_insert" class="btn btn-default active" role="button">Agregar '. $this_table .'</a>';
 //echo '<span style="color:lightgray"> &nbsp;|&nbsp; </span>';
 //echo '<a href="?action=nota_search">Buscar Notas</a>';
 echo '</div>';
@@ -44,9 +48,9 @@ echo '</div>';
 if (empty($params['data'])) {
     echo ('No se encontraron datos');
 } else {
-    $params['primary_key'] = 'urna_id';
-//    $params['link_view']['lista_id']['label'] = 'Ver registro';
-    $params['link_view']['urna_id']['href'] = '?action=urna';
+    $params['primary_key'] = $this_primary_key;
+//    $params['link_view'][$this_primary_key]['label'] = 'Ver registro';
+    $params['link_view'][$this_primary_key]['href'] = '?action='. $this_table;
     $params['display_record_count'] = true;
 
     echo sak_display_array_list($params);

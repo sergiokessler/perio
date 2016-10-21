@@ -10,13 +10,15 @@ if (isset($params['record_id'])) {
 } 
 
 require_once 'lib/data_utils.php';
-require_once 'lib/password.php';
 
 
-$params['table'] = 'urna';
-$params['primary_key'] = 'urna_id';
-$params['action'] = 'urna_update';
-$params['continue'] = 'urna';
+$this_table = 'urna';
+$this_primary_key = 'urna_id';
+$this_seq = 'urna_urna_id_seq';
+$this_action = 'urna_insert';
+$this_continue = 'urna';
+$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>'; 
+
 // <query> 
 
 
@@ -45,7 +47,7 @@ if ( (isset($_REQUEST['btnSubmit']))
     $set = implode('=?, ', array_keys($new_row));
     $set .= '=?';
 
-    $sql = "update $params[table] set $set where $params[primary_key] = ?";
+    $sql = "update $this_table set $set where $this_primary_key = ?";
 
     $sql_data = array_values($new_row);
     $sql_data[] = $record_id;
@@ -62,7 +64,7 @@ if ( (isset($_REQUEST['btnSubmit']))
     $params_cont['record_id'] = $record_id;
     $params_cont = params_encode($params_cont);
 
-    $continue = '?action=' . $params['continue'] . '&params=' . $params_cont;
+    $continue = '?action=' . $this_continue . '&params=' . $params_cont;
 }
 else
 {
@@ -70,7 +72,7 @@ else
     include_once 'header.php';
 
     echo '<div class="page-header">';
-    echo '  <h1>Urna ' . $record_id . ' <small>Edición</small></h1> (Puede pasar de campo usando la tecla Tab)';
+    echo '  <h1>' . ucfirst($this_table) . ' ' . $record_id . ' <small>Edición</small></h1> (Puede pasar de campo usando la tecla Tab)';
     echo '</div>';
 
     echo '<br>';
