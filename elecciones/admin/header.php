@@ -13,13 +13,35 @@
   <body class="admin">
 <?php 
 
-include_once 'menu_1.php';
+unset($data_menu);
+
+$data_menu[]= array (
+                'title' => 'Inicio', 
+                'url' => 'index.php'
+               );
+$data_menu[]= array (
+                'title' => 'Salir', 
+                'url' => 'index.php?action=logout'
+               );
+
+echo '<nav class="navbar navbar-default" role="navigation">';
+echo '<div class="container">';
+echo '<ul id="navlist" class="nav nav-pills navbar-right">';
+foreach ($data_menu as $menu)
+{
+    echo '<li class="btn navbar-btn"><a href="' . $menu['url'] . '">' . $menu['title'] . '</a></li>';
+}
+echo '</ul>';
+echo '</div>';
+echo '</nav>';
+
+
 echo '<div class="container">';
 //echo '<center>';
 echo '<div id="header">';
 echo '<img src="../images/logoperio.png" class="logoperio">';
 echo '<h1 class="tituloh1">';
-echo "Elecciones $anio<br>";
+echo "&nbsp; Elecciones $anio<br>";
 echo '</h1>';
 echo '<img src="../images/logosevit.png" class="logosevit">';
 echo '<div class="clear"></div>';
@@ -30,4 +52,3 @@ echo '</div>';
 if (isset($params['msg']))
     echo '<div style="text-align:right">' . $params['msg'] . '</div>'; 
 
-?>
