@@ -1,10 +1,9 @@
 <?php
 
 /*
-
- $Id: welcome.php,v 1.1 2006/04/12 15:06:31 sak Exp $
-
-*/
+ * by Sak@perio
+ */
+# vim: set fileencoding=ISO-8859-1 
 
 
 include_once 'header.php';

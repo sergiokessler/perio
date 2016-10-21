@@ -1,10 +1,9 @@
 <?php
 
 /*
-
-$Id: login.php,v 1.1 2007/10/10 17:15:47 develop Exp $
-
-*/
+ * by Sak@perio
+ */
+# vim: set fileencoding=ISO-8859-1 
 
 
 if ( (isset($_POST['u'])) 
@@ -26,7 +25,7 @@ if ( (isset($_POST['u']))
         $_SESSION['logged_in'] = $config['realm'];
         $_SESSION['u'] = $_POST['u'];
         $_SESSION['p'] = $_POST['p'];
-        $continue = 'action=home';
+        $continue = '?action=home';
 //        echo '<pre>'; var_dump($_SESSION); echo '</pre>';
     } else
     {

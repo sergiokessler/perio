@@ -15,14 +15,6 @@
 
 unset($data_menu);
 
-$data_menu[]= array (
-                'title' => 'Inicio', 
-                'url' => 'index.php'
-               );
-$data_menu[]= array (
-                'title' => 'Salir', 
-                'url' => 'index.php?action=logout'
-               );
 
 echo '<div class="container">';
 echo '<div class="container-fluid">';
@@ -36,6 +28,12 @@ echo '<img src="../images/logosevit.png" class="logosevit">';
 echo '<div class="clear"></div>';
 echo '</div>';
 echo '</div>';
+
+
+$data_menu[]= array (
+    'title' => 'Inicio', 
+    'url' => 'index.php'
+);
 
 echo '<div class="container">';
 echo '<nav class="navbar navbar-default" role="navigation">';

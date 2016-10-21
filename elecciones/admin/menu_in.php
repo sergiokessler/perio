@@ -44,6 +44,10 @@ $data_menu_op[] = array (
     'url' => 'index.php?action=carga'
 );
 
+$data_menu_op[] = array (
+    'title' => 'Salir del sistema',
+    'url' => 'index.php?action=logout'
+);
 
 echo '<div class="container">';
 echo '<div class="container-fluid">';
