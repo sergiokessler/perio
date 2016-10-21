@@ -67,7 +67,7 @@ if ($form_update and empty($_POST))
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
     
-    $st = $db->prepare('select * from ' . $params['table'] . ' where ' . $params['primary_key'] . ' = ?'); 
+    $st = $db->prepare("select * from $this_table where $this_primary_key = ?"); 
     $st->execute(array($record_id));
     $edit_row = $st->fetch(PDO::FETCH_ASSOC);
 
@@ -80,7 +80,7 @@ if ($form_update and empty($_POST))
 
 // elements
 $form->addElement('hidden', 'action')
-     ->setValue($params['action'])
+     ->setValue($this_action)
      ;
 $form->addElement('hidden', 'params')
      ->setValue($form_params)
