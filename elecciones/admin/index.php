@@ -2,10 +2,10 @@
 
 /*
 
-  $Id: index.php,v 1.1 2007/10/10 17:15:47 develop Exp $
+  $Id: index.php,v 1.1 2006/04/12 15:06:31 sak Exp $
 
 
-  dispatcher del callcenter2
+  front controller
   la idea es que el dispatcher sea lo mas simple posible
   a la vez que sea flexible y facil de mantener y entender
 
@@ -33,6 +33,12 @@
 
 */
 
+session_start();
+require 'config.php';
+include 'lib/session_check.php';
+include 'lib/login_check.php';
+
+
 function params_encode($params)
 {
     return(rawurlencode(base64_encode(gzcompress(serialize($params)))));
@@ -40,19 +46,13 @@ function params_encode($params)
 
 function params_decode($params)
 {
-//    echo 'normal: ' . strlen(gzuncompress(base64_decode($params)));
-//    echo '<br>';
-//    echo 'compress: ' . strlen((base64_decode($params)));
     return(unserialize(gzuncompress(base64_decode(rawurldecode($params)))));
 }
 
-session_start();
-require_once 'config.php';
-include 'share/login_check.php';
 
 if(!isset($action))
 {
-    $action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : 'welcome';
+    $action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : 'home';
 }
 
 
@@ -66,14 +66,13 @@ if (isset($_REQUEST['params']))
 unset($continue);
 
 
-require_once 'action/' . $action . '.php';
+require_once __DIR__ . '/action/' . $action . '.php';
 
 
 if (isset($continue))
 {
     session_write_close();
-    header('Location: index.php?' . $continue);
+    header('Location: ' . $continue);
 }
 
 
-?>

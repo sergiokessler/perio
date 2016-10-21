@@ -26,12 +26,12 @@ $data_menu_op[] = array (
 
 $data_menu_op[] = array (
     'title' => 'Listas',
-    'url' => 'index.php?action=lista'
+    'url' => 'index.php?action=lista_list'
 );
 
 $data_menu_op[] = array (
     'title' => 'Urnas',
-    'url' => 'index.php?action=urna'
+    'url' => 'index.php?action=urna_list'
 );
 
 $data_menu_op[] = array (
@@ -50,14 +50,15 @@ echo 'Menu Operador, seleccione una opcion:';
 echo '<br>';
 echo '<br>';
 
-echo '<div id="menucontainer" class="panel panel-primary" style="max-width: 260px;">';
-echo '<ul id="navlist" class="nav nav-pills nav-stacked" style="max-width: 260px;">';
+echo '<div align="center">';
+echo '<div class="list-group" style="max-width: 720px;">';
 foreach ($data_menu_op as $menu)
 {
-    echo '<li><a href="' . $menu['url'] . '">' . $menu['title'] . '</a></li>';
+    echo '<a class="list-group-item" href="' . $menu['url'] . '">';
+    echo '<h4 class="list-group-item-heading">' . $menu['title'] . '</h4>';
+    echo '<p class="list-group-item-text">...</p>';
+    echo '</a>';
 }
-echo '</ul>';
+echo '</div>';
 echo '</div>';
 
-
-?>
