@@ -19,7 +19,7 @@ $sql = <<<END
         en_total,
         en_porcentaje,
         participa_centro,
-        participa_porcentaje,
+        participa_claustro,
         color,
         lista_id
     from 
