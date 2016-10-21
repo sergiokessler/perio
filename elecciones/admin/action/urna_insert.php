@@ -8,6 +8,7 @@ require_once 'lib/data_utils.php';
 
 $params['table'] = 'urna';
 $params['primary_key'] = 'urna_id';
+$params['seq'] = 'urna_urna_id_seq';
 $params['action'] = 'urna_insert';
 $params['continue'] = 'urna';
 // <query> 
@@ -45,7 +46,7 @@ if ( (isset($_REQUEST['btnSubmit']))
     $st->execute($sql_data);
     
     $msg = "El registro ha sido ingresado satisfactoriamente.";
-    $record_id = $db->lastInsertId();   
+    $record_id = $db->lastInsertId($params['seq']);
     /*
      * end insert the record
      ****************************************************************/
@@ -64,7 +65,7 @@ else
     include 'header.php';
 
     echo '<div class="page-header">';
-    echo '  <h1>' . ucfirst($params['table']) . '<small>Ingresando un registro</small></h1> (Puede pasar de campo usando la tecla Tab)';
+    echo '  <h1>' . ucfirst($params['table']) . ' <small>Ingresando un registro</small></h1> (Puede pasar de campo usando la tecla Tab)';
     echo '</div>';
 
     echo '<br>';
