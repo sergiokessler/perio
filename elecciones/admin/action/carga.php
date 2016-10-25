@@ -1,22 +1,14 @@
 <?php
 
 /*
-
-$Id$
-
-*/
-
-
-require_once 'DB.php';
+ * by Sak@perio
+ */
+# vim: set fileencoding=ISO-8859-1
 
 
 
-function get_fecha($new_row_arr)
-{
-    $fecha = $new_row_arr['Y'] . '-' . $new_row_arr['M'] . '-' . $new_row_arr['d'];
-    return($fecha);
-}
-
+$this_table = 'urna_total';
+$this_action = 'carga';
 
 // <query>
 
@@ -24,85 +16,87 @@ function get_fecha($new_row_arr)
 // </query>
 
 
+$db = new PDO($db_dsn, $db_user, $db_pass);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+
+    $st = $db->prepare($sql); 
+    $st->execute($sql_data); 
 
 
-$db = DB::connect($config['db']) or die('Could connect to DB');
-
-$table = 'urna_total';
 
 // datos de las urnas
 
-$urna_sql = <<<END
-    select 
-        urna_id, 
-        urna_nombre 
-    from 
-        urna 
-    where
-        urna_id not in (select distinct urna_id from urna_total)
-    order by 
-        urna_nombre
-END;
-$urna_select = $db->getAssoc($urna_sql);
+$lista_select = array('' => '-- Seleccione --');
+$lista_select_sql = 'select lista_id as k, lista_nombre as v from lista order by lista_nombre';
+$lista_select_sql_data = array();
+$st = $db->prepare($lista_select_sql);
+$st->execute($lista_select_sql_data);
+while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $lista_select[$row['k']] = $row['v'];
+}
 
-// datos de las listas
-
-$lista_sql = "select lista_id, lista_nombre from lista order by orden";
-$lista_select = $db->getAssoc($lista_sql);
-
-
-
-$campos_cortos = array('size' => 4);
-$campos_medios = array('size' => 8);
-$campos_largos = array('size' => 64);
-
-$votos_attr = array('size' => 8, 'pattern' => '\d*');
-
-$textarea_attr = array('cols="64"');
-
-$date_options = array(
-    'language'  => 'es',
-    'minYear'   => 2005,
-    'maxYear'   => 2020
-);
-
-$date_options_fc = array(
-    'language'  => 'es',
-    'minYear'   => 1930,
-    'maxYear'   => 2000
-);
+$urna_select = array('' => '-- seleccione --');
+$urna_select_sql = 'select urna_id as k, urna_nombre as v from urna where urna_id not in (select distinct urna_id from urna_total) order by urna_nombre';
+$urna_select_sql_data = array();
+$st = $db->prepare($urna_select_sql);
+$st->execute($urna_select_sql_data);
+while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+    $urna_select[$row['k']] = $row['v'];
+}
 
 
-require_once 'HTML/QuickForm.php';
-$form = new HTML_QuickForm('form', 'post');
+$votos_attr = array('maxlength' => 3, 'pattern' => '\d*', 'title' => 'Debe introducir solo números');
+
+
+require_once 'lib/pear/HTML/QuickForm2.php';
+
+$form = new HTML_QuickForm2('form', 'post', array('role' => 'form'));
 
 
 // fields
 
+// elements
+$form->addElement('hidden', 'action')
+     ->setValue($this_action)
+     ;
+$form->addElement('hidden', 'params')
+     ->setValue($form_params)
+     ;
 
-$form->addElement('header', 'MyHeader', 'Carga de votos por urna');
-$form->addElement('hidden', 'action', 'carga');
-//$form->addElement('hidden', 'params', $params_fa);
+$form->addElement('select', 'new_row[urna_id]', array('autofocus' => 'autofocus'))
+     ->setLabel('Urna:')
+     ->loadOptions($urna_select)
+     ->addRule('required', 'Valor requerido')
+     ;
 
-$form->addElement('select', 'new_urna', 'Urna:', $urna_select);
-$form->addRule('new_urna', 'Debe especificar una urna', 'required');
 $form->addElement('static', 'info', '', 'Centro &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Claustro');
-//$form->addElement('static', 'info', '', 'Claustro');
+
+$group = new HTML_QuickForm2_Container_Group(
+    'foo', null, array('separator' => "<br />\n")
+);
+
+$group->addText('first');
+$group->addText('second');
+$group->addText('third');
 
 foreach($lista_select as $lista_id => $lista_nombre)
 {
     unset($votos);
-    $votos[] = &HTML_QuickForm::createElement('text', 'votos_centro', '', $votos_attr);
-    $votos[] = &HTML_QuickForm::createElement('text', 'votos_claustro', '', $votos_attr);
-    $form->addGroup($votos, "new_lista[$lista_id]", $lista_nombre . ':', '&nbsp;');
-    $form->addGroupRule("new_lista[$lista_id]", 'Debe cargar los datos correctamente', 'numeric');
+
+    $group = new HTML_QuickForm2_Container_Group(
+        "new_lista[$lista_id]", null, array('separator' => "&nbsp; &nbsp;")
+    );
+    $group->addText('votos_centro', '', $votos_attr);
+    $group->addText('votos_claustro', '', $votos_attr);
 }
 
+
 $form->addElement('static', 'info', '<div style="color:red">Por Favor, verifique los datos antes de guardar</div>', '');
-$form->addElement('submit', 'btnSubmit', 'Guardar');
+$form->addElement('button', 'btnSubmit', array('type' => 'submit', 'value' => 'Guardar', 'class' => 'btn btn-lg btn-primary'))
+     ->setContent('Guardar')
+     ;
 
-
-// rules
 
 
 
@@ -130,13 +124,20 @@ if (isset($_REQUEST['btnSubmit'])
 
         $new_row['votos_claustro'] = $votos['votos_claustro'];
 
-        $res = $db->autoExecute($table, $new_row, DB_AUTOQUERY_INSERT);
-        if (PEAR::isError($res)) {
-            die( $res->getDebugInfo() );
-        }
-//    echo '<pre>';
-//    var_dump($new_row);
-//    echo '</pre>';
+        /****************************************************************
+         * insert the record
+         */
+        $cols = implode(', ', array_keys($new_row));
+        $vals = implode(', ', array_fill(0, count($new_row), '?'));
+
+        $sql = "insert into $this_table ($cols) values ($vals)";
+        $sql_data = array_values($new_row);
+
+        $st = $db->prepare($sql);
+        $st->execute($sql_data);    
+        /*
+         * end insert the record
+         ****************************************************************/ 
     }
 
     $action_continue = 'carga';
@@ -161,5 +162,3 @@ $form->display();
 
 include_once 'footer.php';
 
-
-?>
