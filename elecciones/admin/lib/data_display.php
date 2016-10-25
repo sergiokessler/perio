@@ -137,11 +137,7 @@ function sak_search_form_process($params)
     if (isset($where['where_arr']))
     {
         $where['where_str'] = join($where['where_arr'], ' and ');
-        if (strpos($params['sql_list'], 'where') === False)
-            $params['sql_where'] = ' where ' . $where['where_str'];
-        else
-            $params['sql_where'] = ' and ' . $where['where_str'];
-
+        $params['sql_where'] = ' and ' . $where['where_str'];
         $params['sql_data']  = $where['params'];
     }
     else
