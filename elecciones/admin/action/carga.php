@@ -24,7 +24,6 @@ $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
 // datos de las urnas
 
-$lista_select = array('' => '-- Seleccione --');
 $lista_select_sql = 'select lista_id as k, lista_nombre as v from lista order by lista_nombre';
 $lista_select_sql_data = array();
 $st = $db->prepare($lista_select_sql);
@@ -81,7 +80,7 @@ foreach($lista_select as $lista_id => $lista_nombre)
 {
     unset($votos);
     $form->addElement('static', null)
-         ->setContent('<label for="votos" class="col-xs-6 text-right control-label">'.$lista_nombre.'</label>')
+         ->setContent('<label for="votos" class="col-xs-6 text-right control-label">'.$lista_nombre.':</label>')
     ;
 
 //    $form->addElement('static', null)
