@@ -166,9 +166,20 @@ if (isset($_REQUEST['btnSubmit'])
 include_once 'header.php';
 
 echo '<br>';
-$form->render($renderer);
-//echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
-echo $renderer;
+if (empty($lista_select)) {
+    echo '<div class="alert alert-success">';
+    echo 'No hay Listas para carga de votos';
+    echo '</div>';
+} elseif (count($urna_select) == 1) {
+    echo '<div class="alert alert-success">';
+    echo 'No hay Urnas disponibles para carga de votos';
+    echo '</div>';
+} else {
+    $form->render($renderer);
+    //echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
+    echo $renderer;
+}
+
 
 include_once 'footer.php';
 
