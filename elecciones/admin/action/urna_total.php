@@ -16,10 +16,21 @@ $this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
 
 $sql = <<<END
     select 
-        *
+        u.urna_nombre || ' (' || u.urna_id || ')' as urna,
+        l.lista_nombre || ' (' || l.lista_id || ')' as lista,
+        mt.fecha_hora,
+        mt.votos_centro,
+        mt.votos_claustro,
+        mt.urna_total_id
     from 
-        $this_table
-    where
+        urna_total mt,
+        urna u,
+        lista l
+    where 
+        mt.urna_id = u.urna_id 
+        and 
+        mt.lista_id = l.lista_id 
+        and
         $this_primary_key = ?
 END;
 $sql_params = array($record_id);
