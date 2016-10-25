@@ -1,4 +1,5 @@
-</div><!--/conteiner -->
+</div><!--/container -->
+</div><!--/container-fluid -->
 <br>
 <br>
 <hr width="70%" size="1">

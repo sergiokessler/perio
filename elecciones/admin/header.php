@@ -6,8 +6,9 @@
 	<meta HTTP-EQUIV="Expires" content="-1">
 	<title>Elecciones FPyCS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="../css/style.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/font-awesome.css" rel="stylesheet" media="screen">
+    <link href="css/style.css" rel="stylesheet" media="screen">
 	<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
   </head>
   <body class="admin">
@@ -31,24 +32,25 @@ echo '</div>';
 
 
 $data_menu[]= array (
+    'icon'  => '<i class="fa fa-home fa-2x"></i>',
     'title' => 'Inicio', 
     'url' => 'index.php'
 );
 
 echo '<div class="container">';
-echo '<nav class="navbar navbar-default" role="navigation">';
+//echo '<nav class="navbar navbar-default" role="navigation">';
 echo '<div class="container-fluid">';
-echo '<div id="navbar" class="navbar-collapse collapse">';
-echo '<ul id="navlist" class="nav nav-pills navbar-right">';
+//echo '<div id="navbar" class="navbar-collapse collapse">';
+//echo '<ul id="navlist" class="nav nav-pills navbar-right">';
 foreach ($data_menu as $menu)
 {
-    echo '<li class="btn navbar-btn"><a href="' . $menu['url'] . '">' . $menu['title'] . '</a></li>';
+    //echo '<li class="btn navbar-btn">';
+    echo '<a href="' . $menu['url'] . '">'. $menu['icon'] . ' ' . $menu['title'] . '</a>';
+    //echo '</li>';
 }
-echo '</ul>';
-echo '</div>';
-echo '</div>';
-echo '</nav>';
-echo '</div>';
+//echo '</ul>';
+//echo '</div>';
+//echo '</nav>';
 
 if (isset($params['msg'])) {
     echo '<div class="alert alert-success">';

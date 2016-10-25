@@ -1,65 +1,68 @@
 <?php
 
-/*
+if (empty($params['record_id'])) {
+    echo 'Debe seleccionar un registro. Presione el boton de Atras';
+    die();
+} else {
+    $record_id = $params['record_id'];
+}  
 
-$Id: premio.php,v 1.2 2007/10/17 18:03:18 develop Exp $
+require_once 'lib/data_display.php';
 
-*/
+$this_table = 'urna_total';
+$this_primary_key = 'urna_total_id';
+$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>'; 
 
-require_once 'share/data_display.php';
-
-
-//unset($params);
-$params['table'] = 'urna_total';
-$params['sql_list'] = <<<END
+$sql = <<<END
     select 
-        mt.*,
-        m.urna_nombre,
-        l.lista_nombre
+        *
     from 
-        urna_total mt,
-        urna m,
-        lista l
-    where 
-        mt.urna_id = m.urna_id 
-        and 
-        mt.lista_id = l.lista_id
+        $this_table
+    where
+        $this_primary_key = ?
 END;
-$params['sql_where'] = '';
-$params['sql_order'] = '';
-$params['sql_data'] = null;
-$params['primary_key'] = $params['table'] . '_id';
-$params['link_view']['field_name'] = $params['primary_key'];
-$params['link_view']['action'] = $params['table'] . '_select';
-$params['display_record_count'] = true;
-//$params['enable_export'] = true;
-
-$field_meta['search']['lista_nombre'] = 'Nombre de Lista';
-$field_meta['search']['urna_nombre'] = 'Nombre de Urna';
-$field_meta['select']['lista_nombre']['sql'] = 'select lista_id, lista_nombre from lista order by lista_nombre';
-$field_meta['select']['urna_nombre']['sql'] = 'select urna_id, urna_nombre from urna order by urna_nombre';
+$sql_params = array($record_id);
 
 
 
-include_once 'header.php';
 
-echo sak_search_form($params, $field_meta);
+include 'header.php';
 
-$insert_title = 'Agregar registro';
-$insert_url = 'index.php?action=' . $params['table'] . '_insert';
-echo "<a href=\"$insert_url\">$insert_title</a>";
+unset($params_cont);
+$params_cont['record_id'] = $record_id;
+$params_cont = params_encode($params_cont);
+
+$action1 = "?action=$this_table" . '_update&params=' . $params_cont;
+$action2 = "?action=$this_table" . '_delete&params=' . $params_cont; 
+
+echo '<div>';
+echo '<h1>' . $this_icon . ' Datos de la ' . get_label($this_table) . ' <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
+echo '<br>';
+//echo '<a href="?action=user_change_pass" class="btn btn-default active" role="button">Agregar Usuario</a>'; 
+echo '<a href="' . $action1 . '" class="btn btn-default active" role="button">Editar ' . $this_table . '</a> ';
+echo '<a href="' . $action2 . '" class="btn btn-default active" role="button">Eliminar ' . $this_table . '</a> ';
 echo '<br>';
 echo '<br>';
+echo '</div>';
 
 
-$buscar = (bool) (isset($_REQUEST['btnSubmit'])) && ($_REQUEST['btnSubmit'] == 'Buscar');
-if ($buscar)
-{                            
-    $params = sak_search_form_process($params);
-    echo sak_display_list($params);
-}
+$db = new PDO($db_dsn, $db_user, $db_pass);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+
+$st = $db->prepare($sql); 
+$st->execute($sql_params);
 
 
-include_once 'footer.php';
+unset($params);
+$params['data'] = $st->fetch(PDO::FETCH_ASSOC);
 
+if (empty($params['data'])) {
+    echo ('No se encontraron datos');
+} else {
+    echo sak_display_array_record($params);
+} 
+
+
+include 'footer.php';
 

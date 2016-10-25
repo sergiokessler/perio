@@ -15,6 +15,7 @@ unset($data_menu_op);
 
 
 $data_menu_op[] = array (
+    'icon'  => '<i class="fa fa-sign-in"></i>&nbsp; &nbsp;',
     'title' => 'Iniciar Sesion',
     'url' => 'index.php?action=login'
 );
@@ -31,7 +32,7 @@ echo '<ul class="nav nav-pills nav-stacked">';
 foreach ($data_menu_op as $menu)
 {
     echo '<li role="presentation">';
-    echo '<a href="' . $menu['url'] . '">'. $menu['title'] .'</a>';
+    echo '<a href="' . $menu['url'] . '">'. $menu['icon'] . $menu['title'] .'</a>';
     echo '</li>';
 }
 echo '</ul>';

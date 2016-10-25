@@ -37,7 +37,7 @@ $action1 = "?action=$this_table" . '_update&params=' . $params_cont;
 $action2 = "?action=$this_table" . '_delete&params=' . $params_cont; 
 
 echo '<div>';
-echo '<h1>' . $this_icon . ' Datos de la ' . ucfirst($this_table) . ' <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
+echo '<h1>' . $this_icon . ' Datos de la ' . get_label($this_table) . ' <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
 echo '<br>';
 //echo '<a href="?action=user_change_pass" class="btn btn-default active" role="button">Agregar Usuario</a>'; 
 echo '<a href="' . $action1 . '" class="btn btn-default active" role="button">Editar ' . $this_table . '</a> ';

@@ -22,37 +22,33 @@ function sak_search_form($params, $field_meta)
     $params_f = params_encode($params_f);
 
 
-    $opciones['*'] = (bool) (isset($_REQUEST['btnOptions']));
-    $opciones['+'] = (bool) (isset($_REQUEST['btnOptions'])) && ($_REQUEST['btnOptions'] == '+');
-    $opciones['-'] = (bool) (isset($_REQUEST['btnOptions'])) && ($_REQUEST['btnOptions'] == '-');
-
     $buscar = (bool) (isset($_REQUEST['btnSubmit'])) && ($_REQUEST['btnSubmit'] == 'Buscar');
 
-
-    if (!$opciones['*'] and !$buscar) {
-        $_SESSION['search_conditions'] = 1;
-    }
-    if ($opciones['+']) {
-        $_SESSION['search_conditions'] += 1;
-    }
-    if ($opciones['-']) {
-        $_SESSION['search_conditions'] -= 1;
+    if (empty($_GET['search_conditions'])) {
+        $search_conditions = 1;
+    } else {
+        $search_conditions = $_GET['search_conditions'];
     }
 
+    if (($search_conditions < 1) or ($search_conditions > 10)) {
+        $search_conditions = 1;
+    }
 
-    $form = '<form name="form_search" method="get">';
 
-    $form .= '<input type="hidden" name="action" value="' . $params['table'] . '">';
+    $form = '<form class="form-inline" name="form_search" method="get">';
+
+    $form .= '<input type="hidden" name="action" value="' . $params['action'] . '">';
 //    $form .= '<input type="hidden" name="params" value="' . $params_f . '">';
     $form .= 'Buscar donde el campo:<br>';
 
-    $search_conditions = $_SESSION['search_conditions'];
     for ($i = 0; $i < $search_conditions; $i++)
     {
         if ($i > 0) {
-            $form .= ' y <br>';
+            $form .= '<br> y <br>';
         }
 
+        $form .= '<div class="form-group">';
+        $form .= '<label class="sr-only" for="field[]">Campo</label>';
         $form .= '<select name="field[]">';
         foreach($field_meta['search'] as $key => $value)
         {
@@ -62,7 +58,10 @@ function sak_search_form($params, $field_meta)
                 $form .= '<option value="' . $key . '">' . $value . '</option>';
         }
         $form .= '</select>';
+        $form .= '</div>';
 
+        $form .= '<div class="form-group">';
+        $form .= '<label class="sr-only" for="operator[]">Operador</label>';
         $form .= '<select name="operator[]">';
         foreach($operator as $key => $value)
         {
@@ -72,18 +71,28 @@ function sak_search_form($params, $field_meta)
                 $form .= '<option value="' . $key . '">' . $value . '</option>';
         }
         $form .= '</select>';
+        $form .= '</div>';
 
+        $form .= '<div class="form-group">';
+        $form .= '<label class="sr-only" for="value[]">Valor</label>';
         if ( isset($_GET['value'][$i]) )
             $form .= '<input type="text" name="value[]" value="' . $_GET['value'][$i] . '">';
         else
             $form .= '<input type="text" name="value[]">';
+        $form .= '</div>';
     }
 
-    $form .= ' <input type="submit" name="btnOptions" value="+">';
-    if ($search_conditions > 1)
-        $form .= ' <input type="submit" name="btnOptions" value="-">';
+    $form .= ' <button class="btn btn-default" type="submit" name="search_conditions" value="'. ($search_conditions+1) .'"> + </button>';
+    if ($search_conditions > 1) {
+        $form .= ' <button class="btn btn-default" type="submit" name="search_conditions" value="'. ($search_conditions-1) .'"> - </button>';
+    }
 
-    $form .= '<br> ordenado por ';
+    $form .= '<br>';
+
+    $form .= 'Ordenado por: ';
+    $form .= '<div class="form-group">';
+//    $form .= '<label class="sr-only" for="field[]">Campo</label>';
+    $form .= '<label class="sr-only" for="order">Orden</label>';
     $form .= '<select name="order">';
     foreach($field_meta['search'] as $key => $value)
     {
@@ -93,8 +102,11 @@ function sak_search_form($params, $field_meta)
             $form .= '<option value="' . $key . '">' . $value . '</option>';
     }
     $form .= '</select>';
+    $form .= '</div>';
 
-    $form .= ' <input type="submit" name="btnSubmit" value="Buscar">';
+    $form .= '<br>';
+
+    $form .= ' <button class="btn btn-primary" type="submit" name="btnSubmit" value="Buscar">Buscar</button>';
     $form .= '</form>';
     
     return($form);

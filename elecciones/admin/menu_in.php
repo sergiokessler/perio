@@ -25,26 +25,31 @@ $data_menu_op[] = array (
 
 
 $data_menu_op[] = array (
+    'icon'  => '<i class="fa fa-list"></i>&nbsp; &nbsp;',
     'title' => 'Listas',
     'url' => 'index.php?action=lista_list'
 );
 
 $data_menu_op[] = array (
+    'icon'  => '<i class="fa fa-folder"></i>&nbsp; &nbsp;',
     'title' => 'Urnas',
     'url' => 'index.php?action=urna_list'
 );
 
 $data_menu_op[] = array (
+    'icon'  => '<i class="fa fa-envelope-open"></i>&nbsp; &nbsp;',
     'title' => 'Editar votos de una urna y lista',
-    'url' => 'index.php?action=urna_total'
+    'url' => 'index.php?action=urna_total_list'
 );
 
 $data_menu_op[] = array (
+    'icon'  => '<i class="fa fa-envelope"></i>&nbsp; &nbsp;',
     'title' => 'Carga de votos',
     'url' => 'index.php?action=carga'
 );
 
 $data_menu_op[] = array (
+    'icon'  => '<i class="fa fa-sign-out"></i>&nbsp; &nbsp;',
     'title' => 'Salir del sistema',
     'url' => 'index.php?action=logout'
 );
@@ -61,7 +66,7 @@ echo '<ul class="nav nav-pills nav-stacked">';
 foreach ($data_menu_op as $menu)
 {
     echo '<li role="presentation">';
-    echo '<a href="' . $menu['url'] . '">'. $menu['title'] .'</a>';
+    echo '<a href="' . $menu['url'] . '">'. $menu['icon'] . $menu['title'] .'</a>';
     echo '</li>';
 }
 echo '</ul>';
