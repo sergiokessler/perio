@@ -73,7 +73,7 @@ else
     include_once 'header.php';
 
     echo '<div class="page-header">';
-    echo '  <h1>' . ucfirst($this_table) . ' ' . $record_id . ' <small>Edición</small></h1> (Puede pasar de campo usando la tecla Tab)';
+    echo '  <h1>' . $this_table_label . ' ' . $record_id . ' <small>Edición</small></h1> (Puede pasar de campo usando la tecla Tab)';
     echo '</div>';
 
     echo '<br>';
