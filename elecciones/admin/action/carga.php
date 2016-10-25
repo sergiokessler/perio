@@ -167,11 +167,13 @@ include_once 'header.php';
 
 echo '<br>';
 if (empty($lista_select)) {
-    echo '<div class="alert alert-success">';
+    echo '<br>';
+    echo '<div class="alert alert-warning">';
     echo 'No hay Listas para carga de votos';
     echo '</div>';
 } elseif (count($urna_select) == 1) {
-    echo '<div class="alert alert-success">';
+    echo '<br>';
+    echo '<div class="alert alert-warning">';
     echo 'No hay Urnas disponibles para carga de votos';
     echo '</div>';
 } else {

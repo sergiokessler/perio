@@ -68,8 +68,10 @@ echo '</div>';
 echo '<div class="volver"><a href=".">Volver a inicio</a></div>';
 
 
-$db = new PDO($config['db']['dsn']); 
+$db = new PDO($db_dsn, $db_user, $db_pass);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+
 
 
 $sql = 'select count(distinct urna_id) as urnas_escrutadas from urna_total';
