@@ -10,6 +10,7 @@ if (empty($params['record_id'])) {
 require_once 'lib/data_display.php';
 
 $this_table = 'urna_total';
+$this_table_label = 'Votos de una Urna y Lista';
 $this_primary_key = 'urna_total_id';
 $this_icon = '<span class="glyphicon glyphicon-folder-close"></span>'; 
 
@@ -36,10 +37,10 @@ $action1 = "?action=$this_table" . '_update&params=' . $params_cont;
 $action2 = "?action=$this_table" . '_delete&params=' . $params_cont; 
 
 echo '<div>';
-echo '<h1>' . $this_icon . ' Datos de la ' . get_label($this_table) . ' <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
+echo '<h1>' . $this_icon . ' Datos de ' . $this_table_label . ' <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
 echo '<br>';
-echo '<a href="' . $action1 . '" class="btn btn-default active" role="button">Editar ' . $this_table . '</a> ';
-echo '<a href="' . $action2 . '" class="btn btn-default active" role="button">Eliminar ' . $this_table . '</a> ';
+echo '<a href="' . $action1 . '" class="btn btn-default active" role="button">Editar ' . $this_table_label . '</a> ';
+echo '<a href="' . $action2 . '" class="btn btn-default active" role="button">Eliminar ' . $this_table_label . '</a> ';
 echo '<br>';
 echo '<br>';
 echo '</div>';
