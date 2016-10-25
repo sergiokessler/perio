@@ -324,7 +324,7 @@ function sak_display_array_record($params, $field_mapping = null)
                 $html[] = "<a href=\"$href\">$label</a>";
             }
             else {
-                $html[] = nl2br(htmlentities($field_value, ENT_COMPAT, $db_charset));
+                $html[] = nl2br(htmlentities($value, ENT_COMPAT, $db_charset));
             }
             $html[] = '</td>';
             $html[] = '</tr>';
