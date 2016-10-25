@@ -10,14 +10,17 @@ require_once 'lib/data_display.php';
 
 //unset($params);
 $this_table = 'urna_total';
+$this_primary_key = 'urna_total_id';
+$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
+
 $sql = <<<END
     select 
-        u.urna_nombre || '(' || u.urna_id || ')' as urna,
-        l.lista_nombre || '(' || l.lista_id || ')' as lista,
+        u.urna_nombre || ' (' || u.urna_id || ')' as urna,
+        l.lista_nombre || ' (' || l.lista_id || ')' as lista,
         mt.fecha_hora,
         mt.votos_centro,
         mt.votos_claustro,
-        mt.urna_total_id as id
+        mt.urna_total_id
     from 
         urna_total mt,
         urna u,
@@ -47,6 +50,7 @@ $field_meta['search']['urna_nombre'] = 'Nombre de Urna';
 
 echo sak_search_form($f_params, $field_meta);
 
+echo '<br>';
 
 $buscar = (bool) (isset($_REQUEST['btnSubmit'])) && ($_REQUEST['btnSubmit'] == 'Buscar');
 if ($buscar)
@@ -69,13 +73,13 @@ if ($buscar)
     if (empty($params['data'])) {
         echo ('No se encontraron datos');
     } else {
-        $params['primary_key'] = $this_table . '_id';
-        $params['link_view']['field_name'] = $params['primary_key'];
-        $params['link_view']['action'] = $this_table . '_select';
+        $params['primary_key'] = $this_primary_key;
+        $params['link_view']['field_name'] = $this_primary_key;
+        $params['link_view']['action'] = $this_table;
         $params['display_record_count'] = true;
 
         echo sak_display_array_list($params);
-    }  
+    }
 }
 
 
