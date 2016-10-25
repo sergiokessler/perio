@@ -17,7 +17,7 @@ $this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
 // <query> 
 
 
-include 'action/urna_form.php';
+include 'action/urna_total_form.php';
 
 
 
