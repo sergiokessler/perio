@@ -20,9 +20,6 @@ $db = new PDO($db_dsn, $db_user, $db_pass);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
-    $st = $db->prepare($sql); 
-    $st->execute($sql_data); 
-
 
 
 // datos de las urnas
@@ -46,8 +43,6 @@ while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
 }
 
 
-$votos_attr = array('maxlength' => 3, 'pattern' => '\d*', 'title' => 'Debe introducir solo números');
-
 
 require_once 'lib/pear/HTML/QuickForm2.php';
 
@@ -60,9 +55,6 @@ $form = new HTML_QuickForm2('form', 'post', array('role' => 'form'));
 $form->addElement('hidden', 'action')
      ->setValue($this_action)
      ;
-$form->addElement('hidden', 'params')
-     ->setValue($form_params)
-     ;
 
 $form->addElement('select', 'new_row[urna_id]', array('autofocus' => 'autofocus'))
      ->setLabel('Urna:')
@@ -70,29 +62,40 @@ $form->addElement('select', 'new_row[urna_id]', array('autofocus' => 'autofocus'
      ->addRule('required', 'Valor requerido')
      ;
 
-$form->addElement('static', 'info', '', 'Centro &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Claustro');
-
-$group = new HTML_QuickForm2_Container_Group(
-    'foo', null, array('separator' => "<br />\n")
+$votos_attr_centro = array(
+    'class' => 'form-inline col-xs-3',
+    'maxlength' => 3, 
+    'pattern' => '\d*', 
+    'title' => 'Debe introducir solo numeros', 
+    'placeholder' => 'Votos Centro'
 );
-
-$group->addText('first');
-$group->addText('second');
-$group->addText('third');
+$votos_attr_claustro = array(
+    'class' => 'form-inline col-xs-3', 
+    'maxlength' => 3, 
+    'pattern' => '\d*', 
+    'title' => 'Debe introducir solo números', 
+    'placeholder' => 'Votos Claustro'
+);
 
 foreach($lista_select as $lista_id => $lista_nombre)
 {
     unset($votos);
+    $form->addElement('static', null)
+         ->setContent('<label for="votos" class="col-xs-6 text-right control-label">'.$lista_nombre.'</label>')
+    ;
 
-    $group = new HTML_QuickForm2_Container_Group(
-        "new_lista[$lista_id]", null, array('separator' => "&nbsp; &nbsp;")
-    );
-    $group->addText('votos_centro', '', $votos_attr);
-    $group->addText('votos_claustro', '', $votos_attr);
+//    $form->addElement('static', null)
+//         ->setContent('<div class="col-xs-8 titus">')
+//    ;
+    $form->addText('votos_centro', $votos_attr_centro);
+//         ->setLabel($lista_nombre);
+    $form->addText('votos_claustro', $votos_attr_claustro);
+//    $form->addElement('static', null)
+//         ->setContent('</div>')
+//    ;
 }
 
 
-$form->addElement('static', 'info', '<div style="color:red">Por Favor, verifique los datos antes de guardar</div>', '');
 $form->addElement('button', 'btnSubmit', array('type' => 'submit', 'value' => 'Guardar', 'class' => 'btn btn-lg btn-primary'))
      ->setContent('Guardar')
      ;
