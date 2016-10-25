@@ -10,8 +10,9 @@ require_once 'lib/data_display.php';
 
 //unset($params);
 $this_table = 'urna_total';
+$this_table_label = 'Votos de una Urna y Lista';
 $this_primary_key = 'urna_total_id';
-$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
+$this_icon = '<i class="fa fa-envelope-open"></i>';
 
 $sql = <<<END
     select 
@@ -36,7 +37,7 @@ include 'header.php';
 
 echo '<div class="page-header">';
 echo '  <h1>Votos de una Urna y Lista<small></small></h1>';
-echo '<a href="?action='. $this_table .'_insert" class="btn btn-default active" role="button">Agregar '. get_label($this_table) .'</a>';
+echo '<a href="?action='. $this_table .'_insert" class="btn btn-default active" role="button">Agregar '. $this_table_label .'</a>';
 echo '</div>';
 
 

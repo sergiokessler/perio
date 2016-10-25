@@ -14,7 +14,7 @@ $this_table = 'urna';
 $this_primary_key = 'urna_id';
 $this_action = 'urna_update';
 $this_continue = 'urna_list';
-$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
+$this_icon = '<i class="fa fa-folder"></i>';
 
 $sql_record1 = <<<END
     select 

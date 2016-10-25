@@ -12,7 +12,7 @@ $this_primary_key = 'urna_total_id';
 $this_seq = 'urna_total_urna_total_id_seq';
 $this_action = 'urna_total_insert';
 $this_continue = 'urna_total_list';
-$this_icon = '<span class="glyphicon glyphicon-folder-close"></span>';
+$this_icon = '<i class="fa fa-envelope-open"></i>';
 
 // <query> 
 

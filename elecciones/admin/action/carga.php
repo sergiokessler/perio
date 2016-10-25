@@ -22,14 +22,12 @@ $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
 
 
-// datos de las urnas
-
 $lista_select_sql = 'select lista_id as k, lista_nombre as v from lista order by orden';
 $lista_select_sql_data = array();
 $st = $db->prepare($lista_select_sql);
 $st->execute($lista_select_sql_data);
 while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $lista_select[$row['k']] = $row['v'];
+    $lista_select[$row['k']] = htmlentities($row['v'], ENT_COMPAT, $db_charset);
 }
 
 $urna_select = array('' => '-- seleccione --');
@@ -38,7 +36,7 @@ $urna_select_sql_data = array();
 $st = $db->prepare($urna_select_sql);
 $st->execute($urna_select_sql_data);
 while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-    $urna_select[$row['k']] = $row['v'];
+    $urna_select[$row['k']] = htmlentities($row['v'], ENT_COMPAT, $db_charset);
 }
 
 
@@ -72,7 +70,7 @@ $votos_attr_claustro = array(
     'class' => 'form-inline col-xs-3', 
     'maxlength' => 3, 
     'pattern' => '\d*', 
-    'title' => 'Debe introducir solo números', 
+    'title' => 'Debe introducir solo numeros',
     'placeholder' => 'Votos Claustro'
 );
 
@@ -82,16 +80,14 @@ foreach($lista_select as $lista_id => $lista_nombre)
     $form->addElement('static', null)
          ->setContent('<label for="votos" class="col-xs-6 text-right control-label">'.$lista_nombre.':</label>')
     ;
-
-//    $form->addElement('static', null)
-//         ->setContent('<div class="col-xs-8 titus">')
-//    ;
+    //$form->addElement('static', null)
+    //       ->setContent('<div class="col-xs-8 titus">')
+    //;
     $form->addText('votos_centro', $votos_attr_centro);
-//         ->setLabel($lista_nombre);
     $form->addText('votos_claustro', $votos_attr_claustro);
-//    $form->addElement('static', null)
-//         ->setContent('</div>')
-//    ;
+    //$form->addElement('static', null)
+    //       ->setContent('</div>')
+    //;
 }
 
 
@@ -155,7 +151,7 @@ if (isset($_REQUEST['btnSubmit'])
     $params['msg'] = 'Los datos han sido guardados satisfactoriamente.';
     $params = params_encode($params);
 
-    $continue = "action=$action_continue&params=$params";
+    $continue = "?action=$action_continue&params=$params";
 
     return;
 }
