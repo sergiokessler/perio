@@ -74,8 +74,8 @@ if ($buscar)
         echo ('No se encontraron datos');
     } else {
         $params['primary_key'] = $this_primary_key;
-        $params['link_view']['field_name'] = $this_primary_key;
-        $params['link_view']['action'] = $this_table;
+        //$params['link_view'][$this_primary_key]['label'] = 'Ver registro';
+        $params['link_view'][$this_primary_key]['href'] = '?action='. $this_table;
         $params['display_record_count'] = true;
 
         echo sak_display_array_list($params);
