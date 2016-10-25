@@ -294,7 +294,7 @@ function sak_display_array_list($params, $field_mapping = null)
 
 function sak_display_array_record($params, $field_mapping = null)
 {
-    global $config;
+    global $db_charset;
 
     // get the record
     $row = $params['data'];
