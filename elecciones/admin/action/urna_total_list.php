@@ -12,15 +12,18 @@ require_once 'lib/data_display.php';
 $this_table = 'urna_total';
 $sql = <<<END
     select 
-        mt.*,
-        m.urna_nombre,
-        l.lista_nombre
+        u.urna_nombre || '(' || u.urna_id || ')' as urna,
+        l.lista_nombre || '(' || l.lista_id || ')' as lista,
+        mt.fecha_hora,
+        mt.votos_centro,
+        mt.votos_claustro,
+        mt.urna_total_id as id
     from 
         urna_total mt,
-        urna m,
+        urna u,
         lista l
     where 
-        mt.urna_id = m.urna_id 
+        mt.urna_id = u.urna_id 
         and 
         mt.lista_id = l.lista_id
 END;
