@@ -22,6 +22,7 @@ $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
 
 
+$lista_select = array();
 $lista_select_sql = 'select lista_id as k, lista_nombre as v from lista order by orden';
 $lista_select_sql_data = array();
 $st = $db->prepare($lista_select_sql);
