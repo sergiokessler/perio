@@ -51,6 +51,10 @@ $boolean2_select['0'] = 'NO';
 
 $name_pattern = "[a-zA-Z0-9ñÑáéíóúü\-_çÇ&,.' ]+";
 
+$db = new PDO($db_dsn, $db_user, $db_pass);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+
 
 $lista_select = array('' => '-- Seleccione --');
 $lista_select_sql = 'select lista_id, lista_nombre from lista order by lista_nombre';
