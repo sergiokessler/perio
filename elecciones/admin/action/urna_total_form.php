@@ -57,7 +57,7 @@ $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
 
 $lista_select = array('' => '-- Seleccione --');
-$lista_select_sql = 'select lista_id, lista_nombre from lista order by lista_nombre';
+$lista_select_sql = 'select lista_id as k, lista_nombre as v from lista order by lista_nombre';
 $lista_select_sql_data = array();
 $st = $db->prepare($lista_select_sql);
 $st->execute($lista_select_sql_data);
@@ -66,7 +66,7 @@ while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
 }
 
 $urna_select = array('' => '-- seleccione --');
-$urna_select_sql = 'select urna_id, urna_nombre from urna order by urna_nombre';
+$urna_select_sql = 'select urna_id as k, urna_nombre as v from urna order by urna_nombre';
 $urna_select_sql_data = array();
 $st = $db->prepare($urna_select_sql);
 $st->execute($urna_select_sql_data);
