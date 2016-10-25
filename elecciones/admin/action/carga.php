@@ -24,7 +24,7 @@ $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
 // datos de las urnas
 
-$lista_select_sql = 'select lista_id as k, lista_nombre as v from lista order by lista_nombre';
+$lista_select_sql = 'select lista_id as k, lista_nombre as v from lista order by order';
 $lista_select_sql_data = array();
 $st = $db->prepare($lista_select_sql);
 $st->execute($lista_select_sql_data);
