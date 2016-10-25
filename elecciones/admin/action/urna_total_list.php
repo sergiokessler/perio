@@ -34,7 +34,7 @@ echo '<a href="?action='. $this_table .'_insert" class="btn btn-default active" 
 echo '</div>';
 
 
-$f_params['action'] = $this_table;
+$f_params['action'] = $this_table . '_list';
 $f_params['sql_where'] = '';
 $f_params['sql_order'] = '';
 $f_params['sql_data'] = null;
