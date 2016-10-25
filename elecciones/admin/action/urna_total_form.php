@@ -108,7 +108,7 @@ $form->addElement('hidden', 'params')
      ->setValue($form_params)
      ;
 
-$form->addElement('select', 'new_row[urna_id]')
+$form->addElement('select', 'new_row[urna_id]', array('autofocus' => 'autofocus'))
      ->setLabel('Urna:')
      ->loadOptions($urna_select)
      ->addRule('required', 'Valor requerido')
@@ -118,7 +118,7 @@ $form->addElement('select', 'new_row[lista_id]')
      ->loadOptions($lista_select)
      ->addRule('required', 'Valor requerido')
      ;
-$form->addElement('text',   'new_row[votos_centro]', array('autofocus' => 'autofocus', 'maxlength' => '3'))
+$form->addElement('text',   'new_row[votos_centro]', array('maxlength' => '3'))
      ->setLabel('Votos Centro:')
      ->addRule('required', 'Valor requerido')
      ;
