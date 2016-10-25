@@ -100,6 +100,15 @@ $form->addElement('button', 'btnSubmit', array('type' => 'submit', 'value' => 'G
      ->setContent('Guardar')
      ;
 
+require_once 'HTML/QuickForm2/Renderer.php';
+require_once 'HTML/QuickForm2/JavascriptBuilder.php';
+$renderer = HTML_QuickForm2_Renderer::factory('default');
+//$renderer->setJavascriptBuilder(new HTML_QuickForm2_JavascriptBuilder(null, __DIR__ . '/../lib/pear/data/HTML_QuickForm2/js')); 
+
+$renderer->setOption(array(
+    'errors_prefix' => 'El formulario contiene errores:',
+    'required_note' => '<div><span class="required">*</span> denota campos requeridos</div>',
+));
 
 
 
@@ -161,7 +170,9 @@ if (isset($_REQUEST['btnSubmit'])
 include_once 'header.php';
 
 echo '<br>';
-$form->display();
+$form->render($renderer);
+//echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
+echo $renderer;
 
 include_once 'footer.php';
 

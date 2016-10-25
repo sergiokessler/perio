@@ -41,7 +41,7 @@ $urnas_total = $row['urnas_total'];
 
 echo '<div class="urnasescrutadas">Cantidad de urnas escrutadas: ' . $urnas_escrutadas . ' / ' . $urnas_total;
 
-echo ' <br />(<a href="urna.php">Ver votos por Urna</a>)</div>';
+//echo ' <br />(<a href="urna.php">Ver votos por Urna</a>)</div>';
 echo '<br>';
 echo '<br>';
 
