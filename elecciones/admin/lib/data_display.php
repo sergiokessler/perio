@@ -216,7 +216,7 @@ function sak_display_array_list($params, $field_mapping = null)
                 $attr_td = $params['attr_td'][$field_name];
             }
             $html .= "<td class=\"listado\" $attr_td>";
-            $field_value = htmlentities($field_value, ENT_HTML5, $db_charset);
+            $field_value = htmlentities($field_value, ENT_COMPAT, $db_charset);
 
             if (isset($link_view) and (isset($link_view[$field_name])) )
             {
