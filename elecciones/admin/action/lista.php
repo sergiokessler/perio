@@ -9,6 +9,11 @@ if (empty($params['record_id'])) {
 
 require_once 'lib/data_display.php';
 
+$this_table = 'lista';
+$this_table_label = 'Listas';
+$this_primary_key = 'lista_id';
+$this_icon = '<i class="fa fa-list"></i>';
+
 
 $sql = <<<END
     select 
@@ -39,11 +44,11 @@ $params_cont['record_id'] = $record_id;
 $params_cont['continue'] = 'user';
 $params_cont = params_encode($params_cont);
 
-$action1 = '?action=lista_update&params=' . $params_cont;
-$action2 = '?action=lista_delete&params=' . $params_cont; 
+$action1 = '?action='. $this_table .'_update&params=' . $params_cont;
+$action2 = '?action='. $this_table .'_delete&params=' . $params_cont; 
 
 echo '<div>';
-echo '<h1><span class="glyphicon glyphicon-user"></span> Datos de la Lista <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
+echo '<h1>'. $this_icon .' Datos de la Lista <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
 echo '<br>';
 //echo '<a href="?action=user_change_pass" class="btn btn-primary" role="button">Agregar Usuario</a>'; 
 echo '<a href="' . $action1 . '" class="btn btn-primary" role="button">Editar Lista</a> ';
