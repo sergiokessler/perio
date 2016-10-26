@@ -54,7 +54,7 @@ $form->addElement('hidden', 'action')
      ->setValue($this_action)
      ;
 
-$form->addElement('select', 'new_row[urna_id]', array('autofocus' => 'autofocus'))
+$form->addElement('select', 'new_urna]', array('autofocus' => 'autofocus'))
      ->setLabel('Urna:')
      ->loadOptions($urna_select)
      ->addRule('required', 'Valor requerido')
