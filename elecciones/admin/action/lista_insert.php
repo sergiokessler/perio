@@ -10,7 +10,7 @@ $params['table'] = 'lista';
 $params['primary_key'] = 'lista_id';
 $params['seq'] = 'lista_lista_id_seq';
 $params['action'] = 'lista_insert';
-$params['continue'] = 'lista';
+$params['continue'] = 'lista_list';
 // <query> 
 
 

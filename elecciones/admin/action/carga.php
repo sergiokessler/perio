@@ -84,8 +84,8 @@ foreach($lista_select as $lista_id => $lista_nombre)
     //$form->addElement('static', null)
     //       ->setContent('<div class="col-xs-8 titus">')
     //;
-    $form->addText('votos_centro', $votos_attr_centro);
-    $form->addText('votos_claustro', $votos_attr_claustro);
+    $form->addText("new_lista[$lista_id][votos_centro]", $votos_attr_centro);
+    $form->addText("new_lista[$lista_id][votos_claustro]", $votos_attr_claustro);
     //$form->addElement('static', null)
     //       ->setContent('</div>')
     //;
@@ -118,7 +118,8 @@ if (isset($_REQUEST['btnSubmit'])
 
     $new_lista = $_REQUEST['new_lista'];
 
-
+    $db->beginTransaction();
+    $inserted = 0;
     foreach ($new_lista as $lista_id => $votos)
     {
         unset($new_row);
@@ -142,16 +143,24 @@ if (isset($_REQUEST['btnSubmit'])
         $sql_data = array_values($new_row);
 
         $st = $db->prepare($sql);
-        $st->execute($sql_data);    
+        $st->execute($sql_data);
+
+        $inserted++;
         /*
          * end insert the record
          ****************************************************************/ 
     }
+    
+    if (count($new_lista) == $inserted) {
+        $db->commit();
+        $params['msg'] = 'Los datos han sido guardados satisfactoriamente.';
+    } else {
+        $db->rollback();
+        $params['msg'] = 'Los datos NO han sido guardados.';
+    }
 
     $action_continue = 'carga';
-    $params['msg'] = 'Los datos han sido guardados satisfactoriamente.';
     $params = params_encode($params);
-
     $continue = "?action=$action_continue&params=$params";
 
     return;

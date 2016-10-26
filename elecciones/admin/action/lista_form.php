@@ -51,7 +51,20 @@ $boolean2_select['0'] = 'NO';
 
 $name_pattern = "[a-zA-Z0-9ñÑáéíóúü\-_çÇ&,.' ]+";
 
-
+$color_select[''] = '--seleccione--';
+$color_select['white'] = 'Blanco';
+$color_select['silver'] = 'Plateado';
+$color_select['gray'] = 'Gris';
+$color_select['black'] = 'Negro';
+$color_select['red'] = 'Rojo';
+$color_select['white'] = 'Blanco';
+$color_select['white'] = 'Blanco';
+$color_select['white'] = 'Blanco';
+$color_select['white'] = 'Blanco';
+$color_select['white'] = 'Blanco';
+$color_select['white'] = 'Blanco';
+$color_select['white'] = 'Blanco';
+$color_select['white'] = 'Blanco';
 
 $form_params = params_encode($params);
 
@@ -122,9 +135,9 @@ $form->addElement('text',   'new_row[orden]', array('pattern' => '\d*', 'maxleng
      ->setLabel('Orden:')
      ->addRule('required', 'Valor requerido')
      ;
-$form->addElement('text',   'new_row[color]', array('pattern' => '\d*', 'maxlength' => '6', 'title' => 'Solo digitos'))
+$form->addElement('select', 'new_row[color]')
      ->setLabel('Color:')
-     ->addRule('required', 'Valor requerido')
+     ->loadOptions($color_select)
      ;
 
 $form->addElement('button', 'btnSubmit', array('type' => 'submit', 'value' => 'Guardar', 'class' => 'btn btn-lg btn-primary'))
