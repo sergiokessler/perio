@@ -39,7 +39,7 @@ $params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
 
 echo '<div class="page-header">';
 echo '  <h1>Listado de '. $this_table .' <small></small></h1>';
-echo '<a href="?action='. $this_table .'_insert" class="btn btn-default active" role="button">Agregar '. $this_table .'</a>';
+echo '<a href="?action='. $this_table .'_insert" class="btn btn-primary" role="button">Agregar '. $this_table .'</a>';
 //echo '<span style="color:lightgray"> &nbsp;|&nbsp; </span>';
 //echo '<a href="?action=nota_search">Buscar Notas</a>';
 echo '</div>';

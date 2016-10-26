@@ -37,7 +37,7 @@ include 'header.php';
 
 echo '<div class="page-header">';
 echo '  <h1>Votos de una Urna y Lista<small></small></h1>';
-echo '<a href="?action='. $this_table .'_insert" class="btn btn-default active" role="button">Agregar '. $this_table_label .'</a>';
+echo '<a href="?action='. $this_table .'_insert" class="btn btn-primary" role="button">Agregar '. $this_table_label .'</a>';
 echo '</div>';
 
 
