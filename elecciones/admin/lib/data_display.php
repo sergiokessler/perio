@@ -38,6 +38,10 @@ function sak_search_form($params, $field_meta)
     $form = '<form class="form-inline" name="form_search" method="get">';
 
     $form .= '<input type="hidden" name="action" value="' . $params['action'] . '">';
+
+    // para que agarre este submit al presionar Enter
+    $form .= '<input style="overflow: visible !important; height: 0 !important; width: 0 !important; margin: 0 !important; border: 0 !important; padding: 0 !important; display: block !important;" type="submit" name="btnSubmit" value="Buscar"/>';
+
 //    $form .= '<input type="hidden" name="params" value="' . $params_f . '">';
     $form .= 'Buscar donde el campo:<br>';
 
