@@ -25,32 +25,37 @@ $data_menu_op[] = array (
 
 
 $data_menu_op[] = array (
+    'accesskey' => 'accesskey="l"',
     'icon'  => '<i class="fa fa-list"></i>&nbsp; &nbsp;',
-    'title' => 'Listas',
+    'title' => '<u>L</u>istas',
     'url' => 'index.php?action=lista_list'
 );
 
 $data_menu_op[] = array (
+    'accesskey' => 'accesskey="u"',
     'icon'  => '<i class="fa fa-folder"></i>&nbsp; &nbsp;',
-    'title' => 'Urnas',
+    'title' => '<u>U</u>rnas',
     'url' => 'index.php?action=urna_list'
 );
 
 $data_menu_op[] = array (
+    'accesskey' => 'accesskey="v"',
     'icon'  => '<i class="fa fa-envelope-open"></i>&nbsp; &nbsp;',
-    'title' => 'Editar votos de una urna y lista',
+    'title' => 'Editar <u>v</u>otos de una urna y lista',
     'url' => 'index.php?action=urna_total_list'
 );
 
 $data_menu_op[] = array (
+    'accesskey' => 'accesskey="c"',
     'icon'  => '<i class="fa fa-envelope"></i>&nbsp; &nbsp;',
-    'title' => 'Carga de votos',
+    'title' => '<u>C</u>arga de votos',
     'url' => 'index.php?action=carga'
 );
 
 $data_menu_op[] = array (
+    'accesskey' => 'accesskey="s"',
     'icon'  => '<i class="fa fa-sign-out"></i>&nbsp; &nbsp;',
-    'title' => 'Salir del sistema',
+    'title' => '<u>S</u>alir del sistema',
     'url' => 'index.php?action=logout'
 );
 
@@ -66,7 +71,7 @@ echo '<ul class="nav nav-pills nav-stacked">';
 foreach ($data_menu_op as $menu)
 {
     echo '<li role="presentation">';
-    echo '<a href="' . $menu['url'] . '">'. $menu['icon'] . $menu['title'] .'</a>';
+    echo '<a href="' . $menu['url'] . '" '. $menu['accesskey'] .'>'. $menu['icon'] . $menu['title'] .'</a>';
     echo '</li>';
 }
 echo '</ul>';
