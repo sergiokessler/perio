@@ -14,17 +14,6 @@ function params_decode($params)
 } 
 
 include 'header.php';
-echo '<div class="container">';
-echo '<img style="margin:0;padding:0" src="img/bgbody.png">';
-//echo '<center>';
-echo '<div id="header">';
-echo '<img src="img/logoperio.png" class="logoperio">';
-echo '<h1 class="tituloh1">';
-echo "Elecciones $anio<br>";
-echo '</h1>';
-echo '<img src="img/logosevit.png" class="logosevit">';
-echo '<div class="clear"></div>';
-echo '</div>';
 
 
 $db = pg_connect($config['db']['pg_str']) or die(pg_last_error($db)); 

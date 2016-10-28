@@ -13,14 +13,15 @@
   <body>
 <?php
 echo '<div class="container">';
-//echo '<center>';
+echo '<div class="container-fluid">';
+echo '<img style="margin:0;padding:0" src="../img/bgbody.png">';
 echo '<div id="header">';
 echo '<img src="../img/logoperio.png" class="logoperio">';
 echo '<h1 class="tituloh1">';
-echo "Elecciones $anio<br>";
+echo "&nbsp; Elecciones $anio<br>";
 echo '</h1>';
 echo '<img src="../img/logosevit.png" class="logosevit">';
 echo '<div class="clear"></div>';
 echo '</div>';
-echo '(Solo urnas de La Plata)';
+echo '</div>';
 
