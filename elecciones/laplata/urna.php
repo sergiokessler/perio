@@ -81,7 +81,7 @@ echo '<div class="volver"><a href=".">Volver a inicio</a></div>';
 echo 'Solo urnas de La Plata</h1>';
 
 
-$db = new PDO($config['db']['dsn']); 
+$db = new PDO($db_dsn);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $st = $db->query($sql_urnas_escrutadas); 
