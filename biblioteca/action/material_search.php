@@ -12,7 +12,11 @@ $sql = <<<END
         titulo,
         disponibilidad,
         palabras_clave,
-        case when char_length(coalesce(archivo_digital, '')) > 0 then '@' else '' end as archivo
+        case 
+            when char_length(coalesce(archivo_digital, '')) > 0 
+                then '@' 
+                else '' 
+        end as archivo
     from 
         libros
     where
@@ -155,7 +159,7 @@ if (empty($_GET['search'])) {
     $w = '';
     $ob = array();
     foreach($sf as $k => $v) {
-        $w .= " || coalesce($k,'') ";
+        $w .= " || coalesce($k::text,'') ";
         $ob[] .= $k;
     }
     $ob = implode($ob, ',');
