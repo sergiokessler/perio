@@ -40,6 +40,10 @@ $doc_tipo['Tesis de grado'] = 'Tesis de grado';
 $doc_tipo['Tesis de posgrado '] = 'Tesis de posgrado ';
 $doc_tipo['Artículo de revista'] = 'Artículo de revista';
 $doc_tipo['Capítulo de libro'] = 'Capítulo de libro';
+$doc_tipo['Anuario'] = 'Anuario';
+$doc_tipo['Plan de estudio'] = 'Plan de estudio';
+$doc_tipo['Programas'] = 'Programas';
+$doc_tipo['TIF'] = 'TIF';
 $doc_tipo['CD'] = 'CD';
 $doc_tipo['DVD'] = 'DVD';
 $doc_tipo['Pagina Web'] = 'Pagina Web';
@@ -257,8 +261,21 @@ $form->addElement('text', 'new_row[soporte_no_convencional]', $campo_medio)
      ->addClass('form-control')
      ;
 $form->addElement('file', 'archivo_digital')
-     ->setLabel('Archivo digital:')
+     ->setLabel('Archivo digital 1:')
      ;
+$form->addElement('file', 'archivo_digital2')
+     ->setLabel('Archivo digital 2:')
+     ;
+$form->addElement('file', 'archivo_digital3')
+     ->setLabel('Archivo digital 3:')
+     ;
+$form->addElement('file', 'archivo_digital4')
+     ->setLabel('Archivo digital 4:')
+     ;
+$form->addElement('file', 'archivo_digital5')
+     ->setLabel('Archivo digital 5:')
+     ;
+
 
 $submit = $form->addSubmit('btnSubmit', array('value' => 'Guardar'))
                ->addClass(array('btn', 'btn-primary'));

@@ -34,17 +34,21 @@ if ( (isset($_REQUEST['btnSubmit']))
 
 
     //var_dump($_FILES);
-    if (is_uploaded_file($_FILES['archivo_digital']['tmp_name']))
-    {
-        $filename = basename($_FILES['archivo_digital']['name']);
-        $filename = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), $filename);
-        $new_row['archivo_digital'] = $filename;
-        $filename = $config['app_root'] . "/../files/" . $filename;
-        //$uploadfile = strtr($string, '.....ÀÂÄÇÉËÍÏÒÔÖÙÛİáãåèêìîñóõøúü', 'SZszYAAAAAACEEEEIIIINOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyy');
-
-        if (!move_uploaded_file($_FILES['archivo_digital']['tmp_name'], $filename)) {
-            die($_FILES['archivo_digital']['error']);
-        }
+    $files = array('archivo_digital', 'archivo_digital2', 'archivo_digital3', 'archivo_digital4', 'archivo_digital5');
+    foreach($files as $file) {
+        if (is_uploaded_file($_FILES[$file]['tmp_name']))
+        {
+            $autor = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), $new_row['autor']);
+            $filename = $autor . '_' . basename($_FILES[$file]['name']);
+            $filename = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), $filename);
+            $new_row[$file] = $filename;
+            $filename = $config['app_root'] . "/../files/" . $filename;
+            //$uploadfile = strtr($string, '.....ÀÂÄÇÉËÍÏÒÔÖÙÛİáãåèêìîñóõøúü', 'SZszYAAAAAACEEEEIIIINOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyy');
+    
+            if (!move_uploaded_file($_FILES[$file]['tmp_name'], $filename)) {
+                die($_FILES[$file]['error']);
+            }
+        }    
     }
 
 
