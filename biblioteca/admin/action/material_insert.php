@@ -38,8 +38,7 @@ if ( (isset($_REQUEST['btnSubmit']))
     foreach($files as $file) {
         if (is_uploaded_file($_FILES[$file]['tmp_name']))
         {
-            $autor = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), $new_row['autor']);
-            $filename = $autor . '_' . basename($_FILES[$file]['name']);
+            $filename = $new_row['autor'] . '_' . basename($_FILES[$file]['name']);
             $filename = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), $filename);
             $new_row[$file] = $filename;
             $filename = $config['app_root'] . "/../files/" . $filename;
