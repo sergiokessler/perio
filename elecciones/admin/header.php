@@ -19,13 +19,13 @@ unset($data_menu);
 
 echo '<div class="container">';
 echo '<div class="container-fluid">';
-echo '<img style="margin:0;padding:0" src="../img/bgbody.png">';
+echo '<img style="margin:0;padding:0" src="../assets/img/bgbody.png">';
 echo '<div id="header">';
-echo '<img src="../img/logoperio.png" class="logoperio">';
+echo '<img src="../assets/img/logoperio.png" class="logoperio">';
 echo '<h1 class="tituloh1">';
 echo "&nbsp; Elecciones $anio<br>";
 echo '</h1>';
-echo '<img src="../img/logosevit.png" class="logosevit">';
+echo '<img src="../assets/img/logosevit.png" class="logosevit">';
 echo '<div class="clear"></div>';
 echo '</div>';
 echo '</div>';
