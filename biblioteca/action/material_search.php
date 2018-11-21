@@ -25,7 +25,6 @@ END;
 $sql_data = array();
 
 
-require_once 'HTML/QuickForm2.php'; 
 include 'share/form_common.php'; 
 
 $search = '';
@@ -97,22 +96,6 @@ $form_html .= '<label class="checkbox-inline"><input type="checkbox" ' . $checke
 
 $form_html .= '</div></form>';
 
-
-$form = new HTML_QuickForm2('search', 'get');
-
-// elements
-$form->addElement('hidden', 'action')
-     ->setValue($action)
-     ;
-
-$form->addElement('text', 'search', $campo_largo)
-     ->setLabel('Buscar material bibliográfico:')
-     ->addClass('form-control')
-     ->addRule('required', 'Valor requerido')
-     ;
-
-$submit = $form->addSubmit('btnSubmit', array('value' => 'Buscar'))
-               ->addClass(array('btn', 'btn-primary'));
 
 
 
