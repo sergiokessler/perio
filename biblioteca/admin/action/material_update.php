@@ -8,8 +8,7 @@ if (isset($params['record_id'])) {
     exit();
 }
 
-require_once 'HTML/QuickForm2.php'; 
-require_once 'share/data_utils.php';
+require_once 'include/data_utils.php';
 
 
 $params['table'] = 'libros';
@@ -20,7 +19,7 @@ $params['continue'] = 'material_select';
 
 
 
-include 'action/material_form.php';
+include 'include/material_form.php';
 
 
 
@@ -28,30 +27,27 @@ include 'action/material_form.php';
 
 if ( (isset($_REQUEST['btnSubmit']))
      and
-     ($_REQUEST['btnSubmit'] == 'Guardar')
-     and
-     ($form->validate()) )
+     ($_REQUEST['btnSubmit'] == 'Guardar') )
 {
 
     $new_row = cleanup_new_row($_POST['new_row']);
 
-    //$new_row['carga_fecha'] = date('Y-m-d H:i');
-
     //var_dump($_FILES);
-    if (is_uploaded_file($_FILES['archivo_digital']['tmp_name']))
-    {
-        $filename = basename($_FILES['archivo_digital']['name']);
-        $filename = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), $filename);
-        $new_row['archivo_digital'] = $filename;
-        $filename = $config['app_root'] . "/../files/" . $filename;
-        //$uploadfile = strtr($string, '................................', 'SZszYAAAAAACEEEEIIIINOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyy');
-
-        if (!move_uploaded_file($_FILES['archivo_digital']['tmp_name'], $filename)) {
-            die($_FILES['archivo_digital']['error']);
-        }
+    $files = array('archivo_digital', 'archivo_digital2', 'archivo_digital3', 'archivo_digital4', 'archivo_digital5');
+    foreach($files as $file) {
+        if (is_uploaded_file($_FILES[$file]['tmp_name']))
+        {
+            $filename = $new_row['autor'] . '_' . basename($_FILES[$file]['name']);
+            $filename = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), $filename);
+            $new_row[$file] = $filename;
+            $filename = $config['app_root'] . "/../files/" . $filename;
+            //$uploadfile = strtr($string, '.....ŔÂÄÇÉËÍĎŇÔÖŮŰÝáăĺčęěîńóőřúü', 'SZszYAAAAAACEEEEIIIINOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyy');
+    
+            if (!move_uploaded_file($_FILES[$file]['tmp_name'], $filename)) {
+                die($_FILES[$file]['error']);
+            }
+        }    
     }
-
-
 
 
     /***********************************************************
@@ -61,6 +57,8 @@ if ( (isset($_REQUEST['btnSubmit']))
     $set .= '=?';
 
     $sql = "update $params[table] set $set where $params[primary_key] = ?";
+    //var_dump($sql);
+    //die();
 
     $sql_data = array_values($new_row);
     $sql_data[] = $record_id;
@@ -86,15 +84,10 @@ else
     include_once 'header.php';
 
     echo '<div class="page-header">';
-    echo '  <img class="pull-right" src="img/logo_sumar_small.png">';
-    echo '  <h1>Nota <small>Editando un registro</small></h1>';
+    echo '  <h1>Material <small>Editando un registro</small></h1>';
     echo '</div>';
 
-    // Output javascript libraries, needed by hierselect
-    //echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
-    $form->render($renderer);
-    echo $renderer;
-
+    echo $material_form;
 
     include_once 'footer.php'; 
 }

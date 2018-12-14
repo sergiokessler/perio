@@ -24,8 +24,8 @@ END;
 
 $sql_data = array($record_id);
 
-require_once 'share/data_utils.php';
-include_once 'share/data_display.php';
+require_once 'include/data_utils.php';
+include_once 'include/data_display.php';
 
 
 

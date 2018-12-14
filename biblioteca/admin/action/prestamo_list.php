@@ -1,6 +1,6 @@
 <?php
 
-require_once 'share/data_display.php';
+require_once 'include/data_display.php';
 
 
 $sql = <<<END
@@ -13,9 +13,6 @@ $sql = <<<END
 END;
 $sql_data = array();
 
-
-require_once 'HTML/QuickForm2.php'; 
-include 'share/form_common.php'; 
 
 
 $form_params = params_encode($params);

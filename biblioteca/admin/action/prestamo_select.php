@@ -24,7 +24,7 @@ $sql_data = array($record_id);
 
 
 
-include_once 'share/data_display.php';
+include_once 'include/data_display.php';
 include_once 'header.php';
 
 echo '<div class="page-header">';

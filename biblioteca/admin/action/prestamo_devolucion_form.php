@@ -1,8 +1,5 @@
 <?php
 
-require_once 'HTML/QuickForm2.php'; 
-include 'share/form_common.php';
- 
 
 
 

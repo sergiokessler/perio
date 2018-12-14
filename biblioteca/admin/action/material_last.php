@@ -1,6 +1,6 @@
 <?php
 
-require_once 'share/data_display.php';
+require_once 'include/data_display.php';
 
 
 $sql = <<<END

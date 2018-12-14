@@ -2,7 +2,7 @@
 
 
 include_once 'header.php';
-include_once 'share/data_display.php';
+include_once 'include/data_display.php';
 
 
 $sql = <<<END

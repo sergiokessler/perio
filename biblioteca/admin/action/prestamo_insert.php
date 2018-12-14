@@ -1,7 +1,6 @@
 <?php
 
-require_once 'HTML/QuickForm2.php'; 
-require_once 'share/data_utils.php';
+require_once 'include/data_utils.php';
 
 
 $params['action']       = 'prestamo_insert';
@@ -13,7 +12,6 @@ $params['seq']          = $params['table'] . '_' . $params['primary_key'] . '_se
 
 $form_params = params_encode($params);
 
-include 'share/form_common.php';
 include 'action/prestamo_form.php';
 
 

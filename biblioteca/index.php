@@ -5,7 +5,7 @@
   $Id: index.php,v 1.1 2007/10/10 17:15:47 develop Exp $
 
 
-  dispatcher del callcenter2
+  dispatcher
   la idea es que el dispatcher sea lo mas simple posible
   a la vez que sea flexible y facil de mantener y entender
 
@@ -76,4 +76,3 @@ if (isset($continue))
 }
 
 
-?>

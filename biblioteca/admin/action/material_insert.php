@@ -1,7 +1,6 @@
 <?php
 
-require_once 'HTML/QuickForm2.php'; 
-require_once 'share/data_utils.php';
+require_once 'include/data_utils.php';
 
 
 $params['action']       = 'material_insert';
@@ -13,8 +12,7 @@ $params['primary_key']  = 'inventario';
 
 $form_params = params_encode($params);
 
-include 'share/form_common.php';
-include 'action/material_form.php';
+include 'include/material_form.php';
 
 
 
@@ -25,15 +23,14 @@ include 'action/material_form.php';
 
 if ( (isset($_REQUEST['btnSubmit']))
      and
-     ($_REQUEST['btnSubmit'] == 'Guardar')
-     and
-     ($form->validate()) )
+     ($_REQUEST['btnSubmit'] == 'Guardar') )
 {
 
     $new_row = cleanup_new_row($_POST['new_row']);
 
 
     //var_dump($_FILES);
+    //var_dump($_REQUEST);
     $files = array('archivo_digital', 'archivo_digital2', 'archivo_digital3', 'archivo_digital4', 'archivo_digital5');
     foreach($files as $file) {
         if (is_uploaded_file($_FILES[$file]['tmp_name']))
@@ -61,8 +58,11 @@ if ( (isset($_REQUEST['btnSubmit']))
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $st = $db->prepare($sql);
-    $st->execute($sql_data);
-
+    try {
+        $st->execute($sql_data);
+    } catch(PDOException $e) {
+        die($e->getMessage());
+    }
     $msg = "El registro ha sido ingresado satisfactoriamente.";
 
 //    $record_id = $db->lastInsertId($params['seq']); 
@@ -89,15 +89,12 @@ if ( (isset($_REQUEST['btnSubmit']))
 // <UI>
 include_once 'header.php';
 
-    echo '<div class="page-header">';
-    echo '  <h1>Material <small>Agregar un registro</small></h1>';
-    echo '</div>'; 
+echo '<div class="page-header">';
+echo '  <h1>Material <small>Agregar un registro</small></h1>';
+echo '</div>'; 
 
-    // Output javascript libraries, needed by hierselect
-    //echo $renderer->getJavascriptBuilder()->getLibraries(true, true);
-    $form->render($renderer); 
+echo $material_form;
 
-    echo $renderer; 
  
 include_once 'footer.php';
 

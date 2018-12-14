@@ -92,26 +92,7 @@ if (isset($_SESSION['logged_in'])) {
 -->            </ul>
           </div><!--/.well -->
 <?php
-} else {
-?>
-
-          <div class="well noprint">
-            <form class="form" method="post" role="form">
-		<input type="hidden" name="action" value="login">
-	      <div class="form-group">
-		<label for="u">Usuario:</label>
-    		<input name="u" class="form-control" type="text" id="u" placeholder="Usuario">
-	      </div>
-	      <div class="form-group">
-    		<label for="p"">Clave:</label>
-    		<input name="p" class="form-control" type="password" id="p" placeholder="Clave">
-	      </div>
-    	      <input class="btn btn-primary" type="submit" value="Iniciar Sesión">
-	    </form>
-	  </div>
-
-<?php            
-}
+} 
 ?>
         </div><!--/col-md-2-->
 

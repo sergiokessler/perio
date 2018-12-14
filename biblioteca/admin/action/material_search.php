@@ -1,6 +1,6 @@
 <?php
 
-require_once 'share/data_display.php';
+require_once 'include/data_display.php';
 
 
 $sql = <<<END
@@ -21,8 +21,6 @@ END;
 $sql_data = array();
 
 
-require_once 'HTML/QuickForm2.php'; 
-include 'share/form_common.php'; 
 
 $search = '';
 if (!empty($_GET['search'])) {
@@ -39,14 +37,15 @@ $form_html = <<<END
     <input type="hidden" name="action" id="action-0" value="material_search" />
   </div>
   <div class="form-group">
-  <div class="input-group">
-    <label for="search-0">Buscar material bibliográfico:</label>
-  </div>
-  <div class="input-group">
-    <input type="text" name="search" id="search-0" value="$search" placeholder="Escriba aqui su búsqueda..." class="form-control"/>
-    <span class="input-group-btn">
-    <input type="submit" value="Buscar" name="btnSubmit" id="btnSubmit-0" class="btn btn-primary" />
-    </span>
+    <div class="input-group">
+        <label for="search-0">Buscar material bibliográfico:</label>
+    </div>
+    <div class="input-group">
+        <input type="text" name="search" id="search-0" value="$search" placeholder="Escriba aqui su búsqueda..." class="form-control"/>
+        <span class="input-group-btn">
+        <input type="submit" value="Buscar" name="btnSubmit" id="btnSubmit-0" class="btn btn-primary" />
+        </span>
+    </div>
   </div>
   <div class="form-group">
 END;
@@ -94,23 +93,6 @@ $form_html .= '<label class="checkbox-inline"><input type="checkbox" ' . $checke
 $form_html .= '</div></form>';
 
 
-$form = new HTML_QuickForm2('search', 'get');
-
-// elements
-$form->addElement('hidden', 'action')
-     ->setValue($action)
-     ;
-
-$form->addElement('text', 'search', $campo_largo)
-     ->setLabel('Buscar material bibliográfico:')
-     ->addClass('form-control')
-     ->addRule('required', 'Valor requerido')
-     ;
-
-$submit = $form->addSubmit('btnSubmit', array('value' => 'Buscar'))
-               ->addClass(array('btn', 'btn-primary'));
-
-
 
 include 'header.php';
 
@@ -120,79 +102,82 @@ echo '  <h1>Buscar Material <small></small></h1>';
 echo '</div>'; 
 
 echo $form_html;
+echo '<br>';
 
 
 if (empty($_GET['search'])) {
+    echo '<br>';
+    echo '<br>';
     include 'footer.php';
     return;
 }
 
 
-    $sql_where = '';
-    $sql_data = array();
+$sql_where = '';
+$sql_data = array();
 
-    $q = $_GET['search'];
-    $sf = $_GET['search_field'];
+$q = $_GET['search'];
+$sf = $_GET['search_field'];
 
-    if ( (ctype_digit($q)) and (!empty($sf['inventario'])) ) {
-        $sql_where = " and inventario = ?";
-        $sql_data[] = $q;
+if ( (ctype_digit($q)) and (!empty($sf['inventario'])) ) {
+    $sql_where = " and inventario = ?";
+    $sql_data[] = $q;
+}
+
+// buscamos por rangos
+if ( (strpos($q, '-') !== false) and (!empty($sf['inventario'])) ) {
+    $q = str_replace(' ', '', $q);
+    $fromto = explode('-', $q, 2);
+    $from = $fromto[0];
+    $to = $fromto[1];
+    if (ctype_digit($from) and ctype_digit($to)) {
+        $sql_where = " and inventario between ? and ?";
+        $sql_data[] = $from;
+        $sql_data[] = $to;
     }
+}
 
-    // buscamos por rangos
-    if ( (strpos($q, '-') !== false) and (!empty($sf['inventario'])) ) {
-        $q = str_replace(' ', '', $q);
-        $fromto = explode('-', $q, 2);
-        $from = $fromto[0];
-        $to = $fromto[1];
-        if (ctype_digit($from) and ctype_digit($to)) {
-            $sql_where = " and inventario between ? and ?";
-            $sql_data[] = $from;
-            $sql_data[] = $to;
-        }
-    }
+$w = '';
+$ob = array();
+foreach($sf as $k => $v) {
+    $w .= " || coalesce($k,'') ";
+    $ob[] .= $k;
+}
+$ob = implode($ob, ',');
 
-    $w = '';
-    $ob = array();
-    foreach($sf as $k => $v) {
-        $w .= " || coalesce($k,'') ";
-        $ob[] .= $k;
-    }
-    $ob = implode($ob, ',');
-
-    if (empty($sql_where)) {
-        $sql_where .= " and ('' $w) ilike ('%' || ? || '%') ";
-        $sql_data[] = $q;
-    }
+if (empty($sql_where)) {
+    $sql_where .= " and ('' $w) ilike ('%' || ? || '%') ";
+    $sql_data[] = $q;
+}
 
 
-    /*
-     * mostramos los resultados
-     */
+/*
+ * mostramos los resultados
+ */
 
-    $sql .= $sql_where . ' order by ' . $ob;
-
-
-    //echo $sql;
-
-    $db = new PDO($config['db']['dsn']);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $st = $db->prepare($sql);
-    $st->execute($sql_data);
+$sql .= $sql_where . ' order by ' . $ob;
 
 
-    unset($params);
-    $params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
+//echo $sql;
 
-    if (empty($params['data'])) {
-        echo _('No data found');
-    } else {
-        $params['primary_key'] = 'inventario';
-        $params['link_view']['inventario']['href'] = '?action=material_select';
+$db = new PDO($config['db']['dsn']);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        echo sak_display_array_list($params);
-    }
+$st = $db->prepare($sql);
+$st->execute($sql_data);
+
+
+unset($params);
+$params['data'] = $st->fetchAll(PDO::FETCH_ASSOC);
+
+if (empty($params['data'])) {
+    echo _('No data found');
+} else {
+    $params['primary_key'] = 'inventario';
+    $params['link_view']['inventario']['href'] = '?action=material_select';
+
+    echo sak_display_array_list($params);
+}
 
 
 include 'footer.php';

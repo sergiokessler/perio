@@ -2,7 +2,7 @@
 
 // $Id: data_display.php,v 1.4 2007/05/08 16:40:06 develop Exp $
 
-require_once 'share/data_utils.php';
+require_once 'include/data_utils.php';
 
 
 

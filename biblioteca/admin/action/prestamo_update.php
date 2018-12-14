@@ -9,7 +9,7 @@ if (isset($params['record_id'])) {
 }
 
 require_once 'HTML/QuickForm2.php'; 
-require_once 'share/data_utils.php';
+require_once 'include/data_utils.php';
 
 
 $params['table'] = 'prestamo';

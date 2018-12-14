@@ -43,20 +43,18 @@ function params_decode($params)
     return(unserialize(gzuncompress(base64_decode(rawurldecode($params)))));
 }
 
-session_start();
 require_once 'config.php';
-include 'share/login_check.php';
+session_name($config['session_name']);
+session_start();
+include 'include/login_check.php';
 
-if(!isset($action))
-{
+if(empty($action)) {
     $action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : 'home';
 }
 
 
-
 $params = '';
-if (isset($_REQUEST['params']))
-{
+if (isset($_REQUEST['params'])) {
     $params = params_decode($_REQUEST['params']);
 }
 
@@ -66,8 +64,7 @@ unset($continue);
 require_once __DIR__ . '/action/' . $action . '.php';
 
 
-if (isset($continue))
-{
+if (isset($continue)) {
     session_write_close();
     header('Location: ' . $continue);
 }

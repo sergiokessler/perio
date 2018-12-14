@@ -17,7 +17,6 @@ $config['db']['dsn'] = 'pgsql:host=127.0.0.1;dbname=dbbiblioteca;user=biblio;pas
 
 ini_set('default_charset', $config['app_charset']);
 
-set_include_path('.:share/pear');
 
 define('MAX_RECORDS_LIST', 500);
 
