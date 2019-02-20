@@ -35,7 +35,7 @@ $material_form = <<<END
 
   <div class="form-group">
     <label for="new_row[otro_titulo]">Otro Título:</label>
-    <input type="text" id="new_row[otro_titulo]" name="new_row[otro_titulo]" maxlength="200" required class="form-control">
+    <input type="text" id="new_row[otro_titulo]" name="new_row[otro_titulo]" maxlength="200" class="form-control">
   </div>
 
   <div class="form-group">
