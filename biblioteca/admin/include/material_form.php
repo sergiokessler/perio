@@ -174,13 +174,23 @@ $material_form = <<<END
   </div>
 
   <div class="form-group">
-    <label for="new_row[resumen]">Resumen/Notas:</label>
-    <input type="textarea" id="new_row[resumen]" name="new_row[resumen]" maxlength="4096" class="form-control">
+    <label for="new_row[descriptor_geografico]">Descriptor Geografico:</label>
+    <input type="text" id="new_row[descriptor_geografico]" name="new_row[descriptor_geografico]" class="form-control">
   </div>
 
   <div class="form-group">
-    <label for="new_row[ubicacion]">Ubicación:</label>
-    <input type="text" id="new_row[ubicacion]" name="new_row[ubicacion]" class="form-control">
+    <label for="new_row[descriptor_temporal]">Descriptor Temporal:</label>
+    <input type="text" id="new_row[descriptor_temporal]" name="new_row[descriptor_temporal]" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="new_row[descriptor_personal]">Descriptor Personal:</label>
+    <input type="text" id="new_row[descriptor_personal]" name="new_row[descriptor_personal]" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="new_row[resumen]">Resumen/Notas:</label>
+    <input type="textarea" id="new_row[resumen]" name="new_row[resumen]" maxlength="4096" class="form-control">
   </div>
 
   <div class="form-group">
@@ -237,6 +247,11 @@ $material_form = <<<END
   <div class="form-group">
     <label for="archivo_digital">Archivo digital 1:</label>
     <input type="file" id="archivo_digital" name="archivo_digital" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="new_row[descriptores]">Descriptores:</label>
+    <input type="text" id="new_row[descriptores]" name="new_row[descriptores]" class="form-control">
   </div>
 
   <div class="form-group">
