@@ -173,6 +173,8 @@ $material_form = <<<END
     <input type="text" id="new_row[palabras_clave]" name="new_row[palabras_clave]" maxlength="256" class="form-control">
   </div>
 
+  <!--
+  // se sacan estos campos por pedido de Blanca
   <div class="form-group">
     <label for="new_row[descriptor_geografico]">Descriptor Geografico:</label>
     <input type="text" id="new_row[descriptor_geografico]" name="new_row[descriptor_geografico]" class="form-control">
@@ -187,6 +189,7 @@ $material_form = <<<END
     <label for="new_row[descriptor_personal]">Descriptor Personal:</label>
     <input type="text" id="new_row[descriptor_personal]" name="new_row[descriptor_personal]" class="form-control">
   </div>
+  -->
 
   <div class="form-group">
     <label for="new_row[resumen]">Resumen/Notas:</label>
@@ -249,10 +252,13 @@ $material_form = <<<END
     <input type="file" id="archivo_digital" name="archivo_digital" class="form-control">
   </div>
 
+  <!--
+  // se sacan estos campos por pedido de Blanca
   <div class="form-group">
     <label for="new_row[descriptores]">Descriptores:</label>
     <input type="text" id="new_row[descriptores]" name="new_row[descriptores]" class="form-control">
   </div>
+  -->
 
   <div class="form-group">
     <label for="archivo_digital2">Archivo digital 2:</label>
