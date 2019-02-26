@@ -115,7 +115,7 @@ $material_form = <<<END
 
   <div class="form-group">
     <label for="new_row[existencias]">Existencias:</label>
-    <input type="text" class="form-control" id="new_row[existencias]" name="new_row[existencias]" maxlength="256">
+    <input type="text" class="form-control" id="new_row[existencias]" name="new_row[existencias]" maxlength="512">
   </div>
 
   <div class="form-group">
@@ -193,7 +193,7 @@ $material_form = <<<END
 
   <div class="form-group">
     <label for="new_row[resumen]">Resumen/Notas:</label>
-    <input type="textarea" id="new_row[resumen]" name="new_row[resumen]" maxlength="4096" class="form-control">
+    <input type="textarea" id="new_row[resumen]" name="new_row[resumen]" maxlength="8192" class="form-control">
   </div>
 
   <div class="form-group">
