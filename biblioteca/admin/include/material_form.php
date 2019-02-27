@@ -115,7 +115,7 @@ $material_form = <<<END
 
   <div class="form-group">
     <label for="new_row[existencias]">Existencias:</label>
-    <input type="text" class="form-control" id="new_row[existencias]" name="new_row[existencias]" maxlength="512">
+    <input type="textarea" id="new_row[existencias]" name="new_row[existencias]" maxlength="8192" class="form-control">
   </div>
 
   <div class="form-group">
