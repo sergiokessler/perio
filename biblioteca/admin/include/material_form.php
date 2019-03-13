@@ -306,6 +306,7 @@ if ($form_update)
     //$script_set = "document.getElementById('medicion_fecha_hora').value='$medicion_fecha_hora'; ";
     $script_set = "document.getElementById('new_row[inventario]').readOnly=true;";
     foreach($edit_row as $key => $value) {
+        $value = addslashes($value);
         $script_set .= "var i = document.getElementById('new_row[$key]'); if(i){i.value='$value'}; ";
     }
     $material_form .= '<script>' . $script_set . '</script>';
