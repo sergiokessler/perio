@@ -29,7 +29,7 @@ $db_charset = 'ISO-8859-1';
 
 $db_dsn = "pgsql:host=$db_host;dbname=$db_dbname";
 
-$config['db']['pg_str'] = 'host=' . $db_host . ' dbname=' . $db_dbname . ' user=' . $db_user . ' password=' . $db_pass;
+$config['db']['pg_str'] = "host=$db_host dbname=$db_dbname user=$db_user password=$db_pass options='--client_encoding=$db_charset'";
 
 
 define('MAX_RECORDS_LIST', 500);
