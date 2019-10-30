@@ -13,9 +13,9 @@
         <img style="margin:0;padding:0" src="assets/img/bgbody.png">
         <div id="header">
             <img src="assets/img/logoperio.png" class="logoperio">
-            <h1 class="display-1">
+            <h3 class="display-3">
                 Elecciones <?= $anio ?> <br>
-            </h1>
+            </h3>
             <img src="assets/img/logosevit.png" class="logosevit">
             <div class="clear"></div>
         </div>
