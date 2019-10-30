@@ -52,7 +52,7 @@ $sql_claustro = <<<END
         l.orden
 END;
 
-include 'header.php';
+include 'include/header.php';
 
 echo '<div class="container">'; 
 
@@ -103,15 +103,15 @@ while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
 
 
 $form = <<<END
-<form role="form">
-  <div class="form-group">
-    <label for="urna_id">Urna: </label>
-    <select class="form-control" name="urna_id">
-      $form_select
-    </select>
-  </div>
-  <button type="submit" name="btnSubmit" class="btn btn-primary">Ver datos</button>
-</form>
+    <form role="form">
+    <div class="form-group">
+        <label for="urna_id">Urna: </label>
+        <select class="form-control" name="urna_id">
+        $form_select
+        </select>
+    </div>
+    <button type="submit" name="btnSubmit" class="btn btn-primary">Ver datos</button>
+    </form>
 END;
 
 echo $form;
@@ -211,5 +211,5 @@ echo '<br>';
 echo '<a href=".">Volver a inicio</a>';
 echo '<br>';
 
-include 'footer.php';
+include 'include/footer.php';
 

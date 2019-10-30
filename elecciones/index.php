@@ -1,7 +1,7 @@
 <?php
 
 include 'config.php';
-include 'graphs.inc.php';
+include 'include/graphs.inc.php';
 
 function params_encode($params)
 {
@@ -13,7 +13,7 @@ function params_decode($params)
     return(unserialize(gzuncompress(base64_decode($params))));
 } 
 
-include 'header.php';
+include 'include/header.php';
 
 
 $db = pg_connect($config['db']['pg_str']) or die(pg_last_error($db)); 
@@ -54,4 +54,4 @@ else
 
 echo '</div>';
 
-include 'footer.php';
+include 'include/footer.php';

@@ -63,10 +63,10 @@ foreach($data_values as $d)
     $html .= '<tr>';
     $html .= '<td>';
     $html .= $d['lista_nombre'];
-    $html .= '<div class="progress progress-striped">';
-    $html .= '<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="'.$perc_rel.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$perc_rel.'%">';
-    $html .= '<span class="sr-only">'.$perc.'% </span>';
-    $html .= '</div>';
+    $html .= '<div class="progress">';
+    $html .= '  <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="'.$perc_rel.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$perc_rel.'%">';
+    $html .= '    <span class="sr-only">'.$perc.'% </span>';
+    $html .= '  </div>';
     $html .= '</div>';
     $html .= '</td>';
     $html .= '<td style="text-align:right">' . $d['votos_centro'] . '</td>';
@@ -79,9 +79,12 @@ $html .= '</table>';
 //$html .= '</div>';
 
 
-$title  = '<h3 style="text-align:center">';
-$title .= "Votos Positivos de Centro: $total_votos votos<br>(sin nulos, blancos e impugnados)";
-$title .= '</h3>';
+
+$title  = <<<END
+    <h3 style="text-align:center">
+        Votos Positivos de Centro: $total_votos votos<br>(sin nulos, blancos e impugnados)
+    </h3>
+END;
 
 //echo '<pre>';
 //print_r($params);
