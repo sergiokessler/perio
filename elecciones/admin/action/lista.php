@@ -3,9 +3,9 @@
 if (empty($params['record_id'])) {
     echo 'Debe seleccionar un registro. Presione el boton de Atras';
     die();
-} else {
-    $record_id = $params['record_id'];
-}  
+}
+
+$record_id = $params['record_id'];
 
 require_once 'lib/data_display.php';
 
@@ -35,9 +35,8 @@ END;
 $sql_params = array($record_id);
 
 
+$html = '';
 
-
-include 'header.php';
 
 unset($params_cont);
 $params_cont['record_id'] = $record_id;
@@ -47,15 +46,6 @@ $params_cont = params_encode($params_cont);
 $action1 = '?action='. $this_table .'_update&params=' . $params_cont;
 $action2 = '?action='. $this_table .'_delete&params=' . $params_cont; 
 
-echo '<div>';
-echo '<h1>'. $this_icon .' Datos de la Lista <i><span class="alert alert-warning">' . $record_id . '</i></span></h1>';
-echo '<br>';
-//echo '<a href="?action=user_change_pass" class="btn btn-primary" role="button">Agregar Usuario</a>'; 
-echo '<a href="' . $action1 . '" class="btn btn-primary" role="button">Editar Lista</a> ';
-echo '<a href="' . $action2 . '" class="btn btn-warning" role="button">Eliminar Lista</a> ';
-echo '<br>';
-echo '<br>';
-echo '</div>';
 
 
 $db = new PDO($db_dsn, $db_user, $db_pass);
@@ -70,11 +60,27 @@ unset($params);
 $params['data'] = $st->fetch(PDO::FETCH_ASSOC);
 
 if (empty($params['data'])) {
-    echo ('No se encontraron datos');
+    $table = 'No se encontraron datos';
 } else {
-    echo sak_display_array_record($params);
+    $table = sak_display_array_record($params);
 } 
 
+$html = <<<END
+    <div>
+        <h1>Datos de la Lista <i><span class="alert alert-warning">$record_id</i></span></h1>
+        <br>
+        <a href="$action1" class="btn btn-primary" role="button">Editar Lista</a> 
+        <a href="$action2" class="btn btn-warning" role="button">Eliminar Lista</a> 
+        <br>
+        <br>
+    </div>
+    $table
+END;
+
+
+include 'header.php';
+
+echo $html;
 
 include 'footer.php';
 
